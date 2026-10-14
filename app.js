@@ -95,7 +95,6 @@ const documentTitles = {
   LICENSE: 'A Tracer licence',
   'THIRD_PARTY_NOTICES.md': 'Források és licencek',
   'LICENSES.md': 'Háttérképek: források és licencek',
-  'VALIDATION.md': 'Ellenőrzések és kiadási korlátok',
   'CHROME_COMPATIBILITY.md': 'Bővítmények kompatibilitása',
   'sources.json': 'Forrásjegyzék',
   'catalog.json': 'Háttérképek katalógusa',
