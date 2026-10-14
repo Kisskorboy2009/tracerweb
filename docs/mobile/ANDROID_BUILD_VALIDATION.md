@@ -1,4 +1,56 @@
-# Android 0.3.7 ellenőrzés
+# Android ellenőrzés
+
+## Végleges 0.3.9 — 2026. október 14.
+
+Elkészült a **Tracer 0.3.9** optimalizált Android APK, versionCode 3009. A felhasználói név minden nyelven Tracer, a meglévő `app.tracer.mobile.preview` csomagazonosító és aláírókulcs megmaradt.
+
+| Ellenőrzés | Eredmény |
+|---|---|
+| Kotlin/Java fordítás, R8 és APK-csomagolás | Sikeres; `minifyEnabled=true`, `debuggable=false` |
+| Android lint | 0 hiba, 68 figyelmeztetés |
+| JVM-tesztek | 49/49 sikeres: 12 updater-, 9 ikon-, 5 kezdőlap- és 23 navigáció/session/request-policy teszt |
+| Natív tesztek a kiadott APK-n | 11/11 sikeres: 4 UI-, 2 APK/provider-, 3 PackageInstaller Session- és 2 szinkronteszt |
+| UI | Natív menü, lapkezelő, világos/sötét megjelenés, Aurora-paletta, keresőváltás, adatkímélő, favicon és oldalon keresés |
+| APK-verifikáció | Tényleges aláírt APK elfogadva; hibás package, signer, verzió, hash és méret visszautasítva |
+| Telepítőátadás | FileProvider csak az updater cache-t adja át; olvasási URI-grant és Android Activity-boundary ellenőrizve |
+| E2EE szinkron | Desktop→Android decryption, módosított ciphertext visszautasítása és Android→desktop hitelesített visszafejtés sikeres |
+| Aláírás és manifest | Érvényes v2, ugyanaz a korábbi Preview-tanúsítvány, API 28+, target SDK 35, backup/cleartext/debug kikapcsolva |
+| Csomagolt assetek | Mind az 5 asset/licenc bájtra és hashre egyezik a forrással; APK, `.sha256` és metadata egyezik |
+| Frissítés 0.3.8-ról a végleges APK-ra | UID, első telepítési idő és teljes kontrollált beállításfájl megmarad, SHA-256 bájtazonosság |
+| Fizikai telefon | Nem futott; a natív ellenőrzések dedikált Pixel 7 / API 35 / Google APIs emulátoron futottak |
+
+```text
+dist/Tracer-0.3.9-android-preview.apk
+Méret: 2 820 661 bájt
+SHA-256: 6e37ea25a36913d4575d35ea58652cfd811ce6a8e07c5cd003a06d309d3ec5bb
+Aláíró tanúsítvány SHA-256: 89dc64757353ad72c710791927db7708d4e8bd1dc41d124b44a5dcce4fdf7bea
+```
+
+Bizonyítékok: `artifacts/android-build-0.3.9.log`, `android-instrumentation-build-0.3.9.log`, `android-instrumentation-0.3.9.log`, `android-instrumentation-0.3.9.json`, `android-package-0.3.9.json`, `sync-android-export-validation-0.3.9.log` és `artifacts/android-ui-0.3.9/`. A screenshotok a WebView vizuális állapotjelzése és két Android rajzolási frame után készülnek; a témapróba a betöltött dokumentum tényleges CSS-színét is ellenőrzi. A Graphit, sötét Aurora és világos Aurora kezdőlapokat, valamint a keresőpanelt szemrevételeztük. Az unstyled HTTPS-oldal világos canvasán 21:1, a keresőpanel mögött dimmelve 6,245:1 tényleges pixelkontrasztot mértünk; a külső dokumentum alapcanvasát a böngésző sötét témája nem színezi át. A null dokumentumgyökérnél a kozmetikai stílusbeillesztés biztonságosan visszatér.
+
+Az updater automatikusan keres és letölt az előre rögzített `Kisskorboy2009/tracerweb` repositoryból. Egy várakozó timer működik: induláskor legalább 20 másodperc, sikeres ellenőrzés után 6 óra, hálózati hiba után 30 perc. Háttérbe kerüléskor a timer megszűnik; egy már megkezdett normál letöltés befejeződhet. Privát folyamatban nincs updater. A stream korlátos bufferrel ellenőrzi a méretet és SHA-256-ot, majd a PackageManager tényleges APK-csomagazonosítót, verziót, SDK-kat és aláírót ellenőriz. Android 12 / API 31 felett ellenőrzött PackageInstaller Session készül, USER_ACTION_NOT_REQUIRED kéréssel és UPDATE_PACKAGES_WITHOUT_USER_ACTION engedéllyel. Az automatikus commit a normál munkamenet és cookie-k tartós mentése után, onStop után vár, és az egész alkalmazás normál/privát folyamatainak láthatóságát ellenőrzi. Privát ablak nyitása és sikertelen állapotmentés elhalasztja a telepítést. A kézi Telepítés gomb a befejezett állapotmentés után azonnal indíthatja a frissítést. A Session tartós, az OS-commit előtti megszakadást felismerve biztonságosan újrapróbálható.
+
+**Android telepítés és mérési korlát:** jogosult Android 12+ önfrissítésnél a rendszer a Sessiont felhasználói jóváhagyás nélkül telepítheti. A külső telepítési forrás engedélyezése egyszer szükséges lehet; Android 9–11 és STATUS_PENDING_USER_ACTION esetén a rendszeres jóváhagyási út megmarad. A natív tesztek valódi Sessiont hoznak létre, APK-t írnak/fsyncelnek/visszaolvasnak, ellenőrzik a tartós helyreállítást, halasztást, módosított APK és hamis callback elutasítását, valamint a megbízható rendszermegerősítést és nem exportált receivert. A visszafordíthatatlan commit tesztkapun blokkolt: tényleges csendes frissítés nem történt. Ez nem igazol távoli, később publikált GitHub-kiadásból végzett teljes telepítést. A korábbi, updater nélküli verziót egyszer kézzel kell frissíteni a 0.3.9-re.
+
+Az emulátoron a végleges 0.3.8→0.3.9 `adb install -r` frissítés megőrizte a UID-t, első telepítési időt és a normál profil teljes, kontrollált könyvjelzőt/előzményt/munkamenetet tartalmazó beállításfájlját. Bizonyíték: `artifacts/android-emulator/upgrade-final-0.3.8-to-0.3.9.json`. A korábbi 0.3.7→0.3.8 próba ugyanezt igazolta. Az instrumentation a dedikált tesztprofilon fut, és nem tesztel felhasználói fiókot. Biometria, valódi OAuth/DRM/videó, telefonos hálózat és készülékgyártónkénti installer-viselkedés külön fizikai ellenőrzést igényel.
+
+A külső instrumentation APK által hívott Kotlin/AndroidX és updater/szinkron belépési pontokat a Preview külön R8-szabálya őrzi meg. Nincs teljes `kotlin.**`, `kotlinx.**` vagy teljes app keep, az optimalizálás bekapcsolva marad; az éles `release` buildet ezek a tesztbelépési szabályok nem érintik.
+
+## 0.3.8 előkészítése — 2026. október 14.
+
+A forrás célverziója 0.3.8 / versionCode 3008. A felhasználói alkalmazásnév minden buildváltozatban **Tracer**; a Preview-csomagazonosító `app.tracer.mobile.preview` és az aláírási konfiguráció megmaradt. A csomagolóscript ellenőrzi a tényleges APK alkalmazásnevét minden nyelven.
+
+A 0.3.8 köztes UI-build, lint, JVM-tesztek és aláírásellenőrzés sikeresen befejeződött. A dedikált Pixel 7 / API 35 emulátoron a 0.3.7-ről végzett `adb install -r` megőrizte az alkalmazás UID-jét, első telepítési idejét és a normál profil könyvjelző-, előzmény- és munkamenet-beállításait. A beállításfájl SHA-256-a a frissítés előtt és az első indítás előtt pontosan egyezett. Bizonyíték: `artifacts/android-emulator/upgrade-0.3.7-to-0.3.8.json`, valamint a hozzá tartozó XML-fájlok.
+
+A köztes APK SHA-256-a `2f1feaf2679c4f814781da6d3729ac9c616d94dfe36fc9eb9190db3d1f17fd4d`, mérete 2 686 333 bájt. Ez nem a készülő automatikus frissítés végleges kiadása. Az első instrumentációs futás az AndroidJUnitRunner indításakor hiányzó `androidx.tracing.Trace` miatt megszakadt; UI- és natív szinkronteszt-sikert emiatt még nem állítunk. A Preview R8-konfiguráció szűk megőrzési szabályt kapott a tesztfuttató megosztott tracing API-jához, az optimalizálás bekapcsolva marad.
+
+## Korábbi 0.3.9 előkészítési állapot
+
+A véglegesítés előtt a forrás célverziója 0.3.9 / versionCode 3009 volt, az Android automatikus frissítésével együtt. Hordozható JDK 17, Gradle 8.11.1, Android SDK 35, adb, Android Emulator 37.2.12, Google APIs API 35 rev9 image és WHPX állt rendelkezésre. A végleges build és a natív futás eredményét a fenti 0.3.9 szakasz tartalmazza; az alábbi 0.3.7 adatok történeti eredmények.
+
+Az alábbi eredmények kizárólag a korábbi 0.3.7 buildre vonatkoznak; nem igazolják a készülő frissítést.
+
+## Korábbi 0.3.7 build
 
 2026. október 13-án elkészült a **Tracer Preview 0.3.7 APK**, versionCode 3007. A csomag fejlesztői kulccsal aláírt, telepíthető előzetes; Android 9 vagy újabb és naprakész Android System WebView szükséges hozzá.
 
@@ -18,7 +70,7 @@
 | YouTube-segéd | Egyezik az asztali forrásból generált mobil assettel; JS szintaxis jó |
 | Készülék / emulátor | Nem futott; nincs kapcsolt készülék vagy telepített emulátor |
 
-A lint-jelzések KTX-, szövegerőforrás-, hozzáférhetőségi és függőségfrissítési ajánlásokat is tartalmaznak. A részletes reportmásolatok a `mobile/testing/android-build-reports/` mappában vannak: `validation.json`, `lint-preview.txt`, `lint-preview.xml`, a három teszt XML, valamint `apk-signature.txt` és `apk-manifest.txt`.
+A lint-jelzések KTX-, szövegerőforrás-, hozzáférhetőségi és függőségfrissítési ajánlásokat is tartalmaznak. A 0.3.7 részletes reportmásolatai a `mobile/testing/android-build-reports/archive-0.3.7/` mappában vannak: `validation.json`, `lint-preview.txt`, `lint-preview.xml`, a három teszt XML, valamint `apk-signature.txt` és `apk-manifest.txt`.
 
 ## Azonosított letöltés
 

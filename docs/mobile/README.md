@@ -42,7 +42,7 @@ mobile/
 
 ## Android APK és AAB
 
-Követelmény: Android SDK 35, JDK 17 és Gradle 8.11.1. A buildhez rögzített AGP 8.9.1 és Kotlin 2.1.20 tartozik. A minimális készülékverzió Android 9 / API 28. Az Android alkalmazás verziója **0.3.7**; a Gradle és a csomagolóscript a projekt gyökerének `package.json` fájljából olvassa a verziót. A növekvő `versionCode` értéke `major × 1000000 + minor × 1000 + patch`, jelenleg 3007. A Gradle wrapper bináris JAR nincs a forrásba másolva; telepített Gradle-lel egyszer generáld, majd a keletkező wrapper-fájlokat verziózd.
+Követelmény: Android SDK 35, JDK 17 és Gradle 8.11.1. A buildhez rögzített AGP 8.9.1 és Kotlin 2.1.20 tartozik. A minimális készülékverzió Android 9 / API 28. Az Android-forrás célverziója **0.3.9**; a Gradle és a csomagolóscript a projekt gyökerének `package.json` fájljából olvassa a verziót. A növekvő `versionCode` értéke `major × 1000000 + minor × 1000 + patch`, ennél a verziónál 3009. A tényleges build és készülékpróba állapotát az [ellenőrzési jegyzőkönyv](ANDROID_BUILD_VALIDATION.md) rögzíti. A Gradle wrapper bináris JAR nincs a forrásba másolva; telepített Gradle-lel egyszer generáld, majd a keletkező wrapper-fájlokat verziózd.
 
 A projekt gyökeréből készíthető a letölthető előzetes APK:
 
@@ -50,9 +50,9 @@ A projekt gyökeréből készíthető a letölthető előzetes APK:
 .\scripts\mobile-build.ps1 -Variant Preview
 ```
 
-A parancs generálja a közös YouTube-védelem mobil assetjét, fordít, futtatja az Android lintet és a JVM-teszteket, majd ellenőrzi az APK-aláírást és a manifestet. Kimenete `dist/Tracer-0.3.7-android-preview.apk`, `.sha256` és `dist/latest-android.json`. Az ellenőrzés összeveti a tényleges verziót, csomagazonosítót, SDK-szinteket és hibakeresési jelzőt a konfigurációval, az APK-aláírót pedig a helyi kulcs tanúsítványával. Megadott `JAVA_HOME`, `ANDROID_HOME` és telepített Gradle / `-GradlePath` használható; ezen a gépen a csak buildhez telepített hordozható eszközök a `%LOCALAPPDATA%/TracerBuildTools` mappában találhatók. A script nem módosítja a rendszer Java- vagy Android-beállításait.
+A parancs generálja a közös YouTube-védelem mobil assetjét, fordít, futtatja az Android lintet és a JVM-teszteket, majd ellenőrzi az APK-aláírást és a manifestet. Kimenete `dist/Tracer-0.3.9-android-preview.apk`, `.sha256` és `dist/latest-android.json`. Az ellenőrzés összeveti a tényleges verziót, csomagazonosítót, SDK-szinteket és hibakeresési jelzőt a konfigurációval, az APK-aláírót pedig a helyi kulcs tanúsítványával. A fordított alkalmazás neve minden buildváltozatban és nyelven **Tracer**; a script ezt is ellenőrzi. Megadott `JAVA_HOME`, `ANDROID_HOME` és telepített Gradle / `-GradlePath` használható; ezen a gépen a csak buildhez telepített hordozható eszközök a `%LOCALAPPDATA%/TracerBuildTools` mappában találhatók. A script nem módosítja a rendszer Java- vagy Android-beállításait. A készülékes és emulátoros eredmény külön mező; új build után mindkettő hamis, amíg a konkrét APK futtatása nincs ellenőrizve.
 
-**Preview aláírás:** az APK optimalizált `preview` build, `debuggable=false`, a release HTTPS-konfigurációval. Az aláírás a gép Android fejlesztői kulcsa; **nem éles kiadói aláírás**. Külön `app.tracer.mobile.preview` csomagazonosítót és „Tracer Preview” nevet kap, a leendő éles alkalmazás mellé telepíthető. A frissítéshez ugyanaz az aláírókulcs kell; a fejlesztői kulcsot a forrás és a website nem tartalmazza. A Gradle tartós helyi kulcsa Windows alatt `%USERPROFILE%/.android/debug.keystore`: ezt őrizd meg a következő Preview-frissítésekhez, és ne másold a weboldalra vagy a forrásba. Elveszett vagy eltérő kulccsal az új APK nem frissítheti a korábbi telepítést. Androidon a letöltő böngészőhöz engedélyezett külső APK-telepítés szükséges. A fordítás és aláírás igazolása nem helyettesít készülékpróbát.
+**Preview aláírás:** az APK optimalizált `preview` build, `debuggable=false`, a release HTTPS-konfigurációval. Az aláírás a gép Android fejlesztői kulcsa; **nem éles kiadói aláírás**. A külön `app.tracer.mobile.preview` csomagazonosító megmarad, a felhasználói név **Tracer**. Így a leendő éles alkalmazás mellé telepíthető, és az átnevezés nem hoz létre másik alkalmazást a korábbi Tracer Preview helyett. A frissítéshez ugyanaz az aláírókulcs kell; a fejlesztői kulcsot a forrás és a website nem tartalmazza. A Gradle tartós helyi kulcsa Windows alatt `%USERPROFILE%/.android/debug.keystore`: ezt őrizd meg a következő Preview-frissítésekhez, és ne másold a weboldalra vagy a forrásba. Elveszett vagy eltérő kulccsal az új APK nem frissítheti a korábbi telepítést. Androidon a letöltő böngészőhöz engedélyezett külső APK-telepítés szükséges. A fordítás és aláírás igazolása nem helyettesít készülékpróbát.
 
 ```powershell
 cd mobile/android
@@ -65,6 +65,14 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 Android Studio automatikusan létrehozza a gépspecifikus `local.properties` fájlt. CLI használatnál állítsd be az `ANDROID_HOME` és `JAVA_HOME` változót az SDK-ra, illetve a JDK 17-re. A debug APK helye `app/build/outputs/apk/debug/app-debug.apk`, a kiadási AAB helye `app/build/outputs/bundle/release/app-release.aab`.
 
 A kiadási konfiguráció szándékosan nem tartalmaz privát kulcsot. Az éles CLI build a `TRACER_ANDROID_KEYSTORE`, `TRACER_ANDROID_STORE_PASSWORD`, `TRACER_ANDROID_KEY_ALIAS` és `TRACER_ANDROID_KEY_PASSWORD` környezeti változókat használja: `.\scripts\mobile-build.ps1 -Variant Release`. A script hiányzó kiadói kulcs esetén megáll, és nem helyettesíti fejlesztői aláírással. Android Studio **Generate Signed App Bundle / APK** művelete is használható. Az aláíratlan `bundleRelease` eredményt nem lehet éles kiadásként telepíteni. Play Store publikálás előtt ellenőrizd a kiadáskori cél-SDK követelményt és a WebView-frissítési követelményeket.
+
+## Android automatikus app-frissítés
+
+A 0.3.9-től a normál profil automatikusan ellenőrzi a `Kisskorboy2009/tracerweb` GitHub release-eit. Induláskor legalább 20 másodperc után keres; siker után 6 órás, hiba után 30 perces időzítést használ, háttérben nincs folyamatos polling. Az új APK automatikusan letöltődik a saját cache-be. A méret, SHA-256, tényleges csomagazonosító, növekvő verzió, SDK-k és a telepített alkalmazással azonos aláíró ellenőrzése kötelező. A frissítő nem kap böngészési vagy privát munkamenetadatot; privát folyamatban nem működik.
+
+A **Shields és beállítások → Automatikus frissítés** kapcsolónál kikapcsolható az automatikus ellenőrzés, kézi keresés és telepítés is kérhető. Az Android egyszer kérheti a Tracerből származó telepítések engedélyezését. Android 12+ esetén az app USER_ACTION_NOT_REQUIRED önfrissítési Sessiont készít; jogosult eszközön a telepítés külön jóváhagyás nélkül történhet. Az automatikus telepítés a munkamenet és cookie-k tartós mentése után, az egész app háttérbe kerülésére vár; látható privát ablak mellett nem commitol. Android 9–11 és a rendszer STATUS_PENDING_USER_ACTION válasza esetén a megszokott Android-jóváhagyás működik. A kézi Telepítés gomb mentés után azonnal indíthatja a telepítést. A korábbi updater nélküli változatra a 0.3.9-et egyszer kézzel kell telepíteni.
+
+A Preview az ugyanilyen csomagazonosítójú, ugyanazzal a tartós helyi kulccsal aláírt új Preview APK-ra frissül; az éles csomag saját éles kulcsát ellenőrzi. Új GitHub-kiadáshoz a tag `vX.Y.Z`, az Android APK `Tracer-X.Y.Z-android-preview.apk` és a hozzá tartozó friss `latest-android.json` legyen ugyanabban a release-ben. A nyilvános ellenőrző összegfájl is kerüljön fel. Az elkészített kiadási útmutató (`../dist/WEBSITE_UPLOAD.md`) a teljes Windows/Android csomag feltöltését írja le.
 
 ## iOS IPA
 
@@ -94,7 +102,7 @@ Az alkalmazás nem igényel és nem állít be alternatív böngészőmotor enti
 |---|---|---|
 | Webcím és keresés; Google / Bing / DuckDuckGo | Implementált | Implementált |
 | Alsó, egykezes címsor és kezelősáv | Implementált | Implementált |
-| 8 paletta; világos / sötét / rendszer mód | Natív spinner, böngészőkeret és új lap | Natív SwiftUI picker, böngészőkeret és új lap |
+| 8 paletta; világos / sötét / rendszer mód | Saját natív választókártyák, böngészőkeret és új lap | Natív SwiftUI picker, böngészőkeret és új lap |
 | Egyéni helyi újlap-háttér | Rendszer-fájlválasztó, noBackupFilesDir JPEG | PhotosPicker / fájlimport, védett Application Support JPEG |
 | Hat alapgyorslink | KissKorboy, OverclockGame, Solaryn, Solaryn Center, Asthetic, Kounee | Ugyanaz a hat HTTPS-link |
 | Mozgáscsökkentés és energiahatékonyság | Alapértelmezésben statikus; akkukímélő / rendszeranimáció-tiltás támogatva | Alapértelmezésben statikus; Low Power / Accessibility Reduce Motion támogatva |
@@ -114,7 +122,9 @@ Az alkalmazás nem igényel és nem állít be alternatív böngészőmotor enti
 | Privát izoláció | Külön `:private` process és `private` WebView adatkönyvtár | Elkülönített, nem tartós `WKWebsiteDataStore` |
 | Privát biometria | AndroidX BiometricPrompt; API 28–29 erős biometria, API 30+ készülékzár fallback | LocalAuthentication, Face ID / Touch ID / készülékjelszó |
 | Privát képernyőképvédelem | `FLAG_SECURE` | Zároló felület app-inaktiváláskor; rendszerképernyőképet nem tud általánosan tiltani |
-| Adatkímélő | Hálózati képek tiltása | Képek és média content-rule tiltása |
+| Adatkímélő | Hálózati képek tiltása; ismert HTTPS-keresőeredményoldalakon az eredményikonok megmaradnak | Képek és média content-rule tiltása |
+| Webhelyikonok | Oldal által átadott favicon, navigációbélyeggel ellenőrzött korlátos memóriacache; helyi monogram fallback | Helyi monogram |
+| GitHub app-frissítés | Automatikus ellenőrzés/letöltés; Android 12+ jogosult önfrissítési Session, régi rendszeren vagy OS-kérésre megerősítés | Nincs implementálva |
 | Surge | Inaktív webnézetek megsemmisítése, URL-alapú visszatöltés | Inaktív webnézetek megsemmisítése, URL-alapú visszatöltés |
 | App háttérbe kerülése | Betöltés leállítása, `onPause` és processzszintű JS-timer-pause | Minden WKWebView megsemmisítése; a tab URL-je memóriában megmarad |
 | Ghost | Aktív profil cookie/cache/WebStorage és lapok törlése; normál profilból a privát process is kap explicit, nem exportált törlési értesítést | Minden webnézet és privát memóriatár eldobása; normál webhelyadatok törlése |
@@ -137,9 +147,9 @@ A privát natív párbeszédek is képernyőképvédelmet kapnak, és háttérbe
 
 ## Megjelenés, saját háttér és gyorslinkek
 
-A **Megjelenés és háttér** menüpont Androidon natív paletta- és módválasztót, iOS-en SwiftUI beállítófelületet nyit. A nyolc paletta: Graphit, Aurora, Kobalt, Ibolya, Rózsa, Borostyán, Erdő és Óceán. Mindegyiknek külön világos és sötét háttér-, szöveg- és kiemelőszíne van. A kiválasztott paletta és a **Rendszertéma / Világos / Sötét** mód újraindítás után is megmarad. A színváltás a natív böngészőkeretet, párbeszédeket és az új lapot frissíti. Androidon a rendszeres nappali/éjszakai váltást `uiMode` konfigurációfrissítés kezeli; iOS-en a SwiftUI rendszer-színsémája vezérli.
+A **Megjelenés** menüpont Androidon saját natív paletta- és módválasztó kártyákat, iOS-en a **Megjelenés és háttér** SwiftUI beállítófelületét nyitja. A nyolc paletta: Graphit, Aurora, Kobalt, Ibolya, Rózsa, Borostyán, Erdő és Óceán. Mindegyiknek külön világos és sötét háttér-, szöveg- és kiemelőszíne van. A kiválasztott paletta és a **Rendszertéma / Világos / Sötét** mód újraindítás után is megmarad. A színváltás a natív böngészőkeretet, párbeszédeket és az új lapot frissíti. Androidon a rendszeres nappali/éjszakai váltást `uiMode` konfigurációfrissítés kezeli; iOS-en a SwiftUI rendszer-színsémája vezérli.
 
-Az új lap hat helyi, monogramos kártyája csak kattintás után nyit hálózati oldalt; külső favicon-lekérés nincs:
+Az új lap hat helyi kártyája csak kattintás után nyit hálózati oldalt; Androidon saját SVG-ikonok jelennek meg, külső favicon-lekérés nincs:
 
 - [KissKorboy](https://kisskorboy.hu)
 - [OverclockGame](https://overclockgame.hu)
@@ -179,14 +189,15 @@ Helyi Android fejlesztéshez indítsd a desktop relayt, majd használd az `adb r
 
 ### Kriptográfiai interoperabilitási ellenőrzés
 
-A `mobile/testing/sync-vector.json` a desktop implementációval készült, nyilvános tesztjelszavas, Unicode/emoji adatot is tartalmazó mintacsomag. Az Android instrumentation és iOS XCTest tesztek ezt visszafejtik, ellenőrzik a payloadot, visszautasítják a módosított ciphertextet, és mobilon készített exportot írnak a visszirányú desktop-ellenőrzéshez. A natív tesztek ebben a Windows-környezetben **nem futottak**.
+A `mobile/testing/sync-vector.json` a desktop implementációval készült, nyilvános tesztjelszavas, Unicode/emoji adatot is tartalmazó mintacsomag. Az Android instrumentation és iOS XCTest tesztek ezt visszafejtik, ellenőrzik a payloadot, visszautasítják a módosított ciphertextet, és mobilon készített exportot írnak a visszirányú desktop-ellenőrzéshez. A 0.3.9 Android Preview APK két natív szinkrontesztje a Windows-gépen futó API 35 emulátoron sikeres; az Android exportját a desktop is hitelesítetten visszafejtette. Az iOS XCTest és fizikai készülékpróba még nem futott. A részletes bizonyíték az [Android ellenőrzési jegyzőkönyvben](ANDROID_BUILD_VALIDATION.md) szerepel.
 
 ```powershell
-# Android SDK-val és kapcsolt eszközzel, mobile/android könyvtárból:
-.\gradlew.bat :app:connectedDebugAndroidTest
-adb exec-out run-as app.tracer.mobile cat files/sync-android-export.json > sync-android-export.json
-# A projekt gyökeréből:
-node mobile/testing/verify-native-export.cjs mobile/android/sync-android-export.json
+# Android SDK-val és kapcsolt eszközzel, a projekt gyökeréből:
+gradle -p mobile/android :app:connectedPreviewAndroidTest
+# Export a dedikált, rootot támogató Google APIs tesztemulátorról:
+adb -s emulator-5554 root
+adb -s emulator-5554 pull /data/user/0/app.tracer.mobile.preview/files/sync-android-export.json artifacts/sync-android-export-0.3.9.json
+node mobile/testing/verify-native-export.cjs artifacts/sync-android-export-0.3.9.json
 ```
 
 ```bash
