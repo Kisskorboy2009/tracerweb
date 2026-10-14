@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "version": "0.3.8",
+  "generatedAt": "2026-10-14T08:44:42.071Z",
+  "channel": "development",
+  "hosting": {
+    "provider": "github-releases",
+    "repository": "Kisskorboy2009/tracerweb",
+    "tag": "v0.3.8"
+  },
+  "platforms": {
+    "windows": {
+      "status": "available",
+      "label": "Windows 10 / 11 · x64",
+      "version": "0.3.8",
+      "filename": "Tracer-Setup-0.3.8-x64.exe",
+      "url": "https://github.com/Kisskorboy2009/tracerweb/releases/download/v0.3.8/Tracer-Setup-0.3.8-x64.exe",
+      "checksumUrl": "https://github.com/Kisskorboy2009/tracerweb/releases/download/v0.3.8/Tracer-Setup-0.3.8-x64.exe.sha256",
+      "sizeBytes": 155834269,
+      "sha256": "ccb26e178f5437c32a2f621a98a3e6093d78a959eeabf6ac707e366db61793c8",
+      "requirements": "Windows 10 vagy 11, 64 bites számítógép",
+      "signing": "unsigned",
+      "signed": false,
+      "note": "Aláíratlan fejlesztői telepítő. A Windows ismeretlen kiadót jelezhet."
+    },
+    "android": {
+      "status": "available",
+      "label": "Android · előzetes kiadás",
+      "version": "0.3.7",
+      "filename": "Tracer-0.3.7-android-preview.apk",
+      "url": "https://github.com/Kisskorboy2009/tracerweb/releases/download/v0.3.8/Tracer-0.3.7-android-preview.apk",
+      "checksumUrl": "https://github.com/Kisskorboy2009/tracerweb/releases/download/v0.3.8/Tracer-0.3.7-android-preview.apk.sha256",
+      "sizeBytes": 2636921,
+      "sha256": "f2c6cbfba321582f69dd521f3998de760ef91ac2cb353197782b963b6be11d2a",
+      "requirements": "Android 9 vagy újabb (API 28)",
+      "buildType": "preview",
+      "signing": "debug",
+      "signed": true,
+      "testedOnDevice": false,
+      "packageId": "app.tracer.mobile.preview",
+      "note": "Fejlesztői kulccsal aláírt, készüléken még nem tesztelt előzetes APK. Telepítéséhez engedélyezni kell az adott forrásból származó alkalmazásokat."
+    },
+    "ios": {
+      "status": "unavailable",
+      "label": "iPhone / iPad",
+      "note": "Apple által aláírt iOS-kiadás még nem érhető el. A projekt SwiftUI / WebKit forrást tartalmaz."
+    }
+  }
+}

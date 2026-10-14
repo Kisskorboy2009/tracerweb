@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Tracer</title>
+  <desc>One continuous black mark: a tapered blade with a sweeping directional trail.</desc>
+  <rect x="0" y="0" width="128" height="128" rx="28" fill="#c5ec98"/><path fill="#111711" d="M55 16 L74 16 L70 45 L89 38 L84 29 L111 32 L102 57 L97 48 C87 54 77 58 68 61 L60 113 L52 106 L56 66 C35 73 15 69 12 58 C8 45 24 36 48 31 L46 42 C29 47 23 51 24 55 C26 60 39 60 57 54 L55 16 Z"/>
+</svg>
