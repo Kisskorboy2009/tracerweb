@@ -1,6 +1,46 @@
 # Android ellenőrzés
 
-## Végleges 0.3.10 — 2026. október 15.
+## Végleges 0.3.11 — 2026. október 15.
+
+Elkészült a **Tracer 0.3.11** optimalizált Android APK, versionCode 3011. A csomagazonosító `app.tracer.mobile.preview`, az alkalmazás neve Tracer, az R8-optimalizálás bekapcsolva, `debuggable=false`. Az aláíró a korábbi kiadásokkal azonos Preview-kulcs.
+
+| Ellenőrzés | Eredmény |
+|---|---|
+| Fordítás, R8 és APK-aláírás | Sikeres; API 28+, target SDK 35, érvényes v2 aláírás |
+| Android lint | 0 hiba, 72 figyelmeztetés; a végső tesztforrásokkal is újraellenőrizve |
+| JVM-tesztek | 56/56 sikeres |
+| Teljes determinisztikus natív futás | 21/21 sikeres, 157,647 másodperc; a külön hálózati YouTube-próba kizárva |
+| Natív tesztcsoportok | 5 UI/téma/eszköztár, 2 APK/provider, 3 PackageInstaller Session, 2 szinkron, 4 alapértelmezett böngésző, 2 médiaszolgáltatás, 2 HTMLAudio és 1 tényleges H264/AAC VIDEO |
+| Alapértelmezett téma és eszköztár | Hiányzó vagy hibás témapreferenciánál sötét; az explicit világos választás megmarad; felső/alsó eszköztárváltás megtartja a külső oldal WebView-ját és JavaScript-állapotát, a választás újraindítás után is érvényes |
+| Valódi YouTube | Külön 71,931 másodperces futás; `real-video-playback-passed`, hallhatóként jelzett, némítatlan videó előtérben, Home után, lezárt képernyőn és natív szüneteltetés/folytatás után |
+| Kontrollált videó | Saját, nem néma H264/AAC MP4 tényleges VIDEO-elemen, `m.youtube.com` originen, kizárólag helyben kiszolgált kérésekkel; Home, zár, értesítésből folytatás és explicit szüneteltetés sikeres |
+| Frissítés 0.3.10-ről | Azonos aláíró; `adb install -r`, változatlan UID és első telepítési idő; a meglévő QA-profil teljes, 316 bájtos beállításfájlja byteazonos maradt |
+| APK és bizonyítékok | Gradle-APK, kiadott másolat, checksum és metadata egyezik; mind a 6 asset mérete és hashértéke forrásazonos; 39 production és 15 teszt-/buildforrás hashértéke rögzítve |
+| Képernyőképek | 14 aktuális UI-, 2 média-, 5 kontrollált videó- és 7 aktuális live YouTube-kép kötve a jelentéshez; korábbi hibaképek nem kerültek a végső listába |
+| Fizikai készülék | Nem tesztelt; dedikált, rejtett Pixel 7 / API 35 / Google APIs emulátor, Android System WebView 124.0.6367.219 |
+
+```text
+dist/Tracer-0.3.11-android-preview.apk
+Méret: 2 871 642 bájt
+SHA-256: 6d2a3b3196a4d668aa45a731832bb80b10a9668925b3622ce40ecbb46eddd7ae
+Aláíró tanúsítvány SHA-256: 89dc64757353ad72c710791927db7708d4e8bd1dc41d124b44a5dcce4fdf7bea
+```
+
+A valódi YouTube-próba a nyilvános Blender-videót használta (`https://m.youtube.com/watch?v=aqz-KE-bpKQ`), bejelentkezés nélkül. A némítás feloldása a ténylegesen látható oldalvezérlőn végzett megbízható Android-érintéssel történt. A lejátszási idő előtérben **2,211 mp**, Home után **2,685 mp**, lezárt képernyőn **2,374 mp**, natív szüneteltetés/folytatás után **2,515 mp** értékkel nőtt. Mindegyik mérés ugyanazt a némítatlan, nem szünetelő VIDEO-elemet és `isMusicActive=true` állapotot ellenőrizte. A zár és folytatás mérésekor `interactive=false`, az Activity valódi ablakfókusza hamis volt.
+
+A próba az indulást és a folyamatos lejátszást külön méri: kizárólag a kezdeti PLAY és a kézi natív PLAY után vár legfeljebb 12 másodpercig `readyState>=3`, aktív hang és legalább 0,25 mp tényleges órahaladás állapotára. A végső live futásban ez **8,541 mp**, illetve **3,970 mp** volt. A Home és képernyőzár előtt nincs új várakozás. A további 2,5 másodperces live mérések változatlanul több mint 1 mp előrehaladást követelnek; a kontrollált VIDEO 2,2 másodperces méréseinek küszöbe több mint 0,8 mp. A korábbi pufferelési és dekóderindulási sikertelen próbák diagnosztikaként megmaradtak, a végső hashkötés a sikeres futásokat azonosítja.
+
+A javítás szükségességét a tényleges videó igazolta: a korábbi audio-only WAV-teszt mellett a videó natív háttérbe kerüléskor leállt. A natív WebView-védelem a kiválasztott, engedélyezett, ténylegesen játszó média motorját tartja aktívan; explicit szüneteltetéskor a valódi rejtett állapot visszaáll. A live diagnózis ezt követően kimutatta, hogy a YouTube szüneteltetéskor eltávolítja a videó forrását. A folytatás ezért a videót tartalmazó, ténylegesen megfigyelt YouTube-lejátszó saját `playVideo()` vezérlőjét használja. A jelentésben látható a forrás visszaállása és az eredeti pozícióból történő folytatás. Ez kizárólag kifejezett natív PLAY-re történik.
+
+A teljes natív futás kontrollált videójában Home alatt **2,524 mp**, kikapcsolt képernyőn **1,823 mp**, natív folytatás után **1,986 mp** előrehaladás és aktív hang mérhető; az explicit szüneteltetést nem írja felül újraindítási hurok. A nem néma WAV-teszt megfelelő értékei **2,081 / 1,687 / 1,974 mp**, külső link és Surge mellett **2,043 mp**. A lap bezárása leállítja a hangot, az audiofókusz elvesztése felfüggeszti. Az aktuális WAV-képrögzítés kérte a rendszer médiapaneljét, de látható vezérlőt nem talált (`nativeMediaControlsVisible=false`); a natív MediaSession- és értesítési műveletek funkcionális tesztjei ettől függetlenül sikeresek. A kezdőlapot és az eszköztár mindkét elhelyezését a kész képeken is szemrevételeztük.
+
+A WebView 124 a kontrollált oldalon nem teszi elérhetővé a webes `navigator.mediaSession` API-t: `pageMediaSessionApiPresent=false`, `siteMediaSessionHandlerInvoked=false`. A jelentés ezt rögzíti; e futás nem állít webes MediaSession-handlerhívást. A natív MediaSession és a tényleges live YouTube-vezérlő külön ellenőrzött. Az emulátor `-no-audio` kapcsolóval futott; a bizonyíték a dekódolt média órája és az Android hangaktivitási állapota, nem fizikai hangszóró meghallgatása.
+
+Az APK, teszt-APK, teljes natív napló, külön live napló, összes felsorolt kép és mérési JSON hashértéke az `artifacts/android-instrumentation-0.3.11.json` jelentésben szerepel. A csomag/asset jelentés az `artifacts/android-package-0.3.11.json`, a jelenlegi teljes összesítés a `mobile/testing/android-build-reports/validation.json`; a korábbi másolt jelentések az `archive-0.3.10` mappában maradtak. A 0.3.10→0.3.11 frissítés bizonyítéka az `artifacts/android-emulator/upgrade-0.3.10-to-0.3.11/upgrade-final.json`. A frissítési profil nem tartalmazott külön könyvjelző-fixture-t, ezért ez a mérés kizárólag a ténylegesen mentett 316 bájtos QA-beállítás megőrzését bizonyítja.
+
+Az automatikus frissítő valódi PackageInstaller Session-létrehozását, írását, `fsync`-jét, tartósságát és ellenőrzéseit teszteltük; a végső commit szándékosan elfogott (`actualInstallationPerformed=false`). Fizikai készüléket és jövőbeli GitHub-release automatikus telepítését nem teszteltük; kiadásfeltöltés nem történt. Az alábbi korábbi szakaszok történeti ellenőrzések.
+
+## Korábbi végleges 0.3.10 — 2026. október 15.
 
 Elkészült a **Tracer 0.3.10** optimalizált Android APK, versionCode 3010. A név minden nyelven Tracer, a csomagazonosító `app.tracer.mobile.preview`, az aláíró a korábbi Preview-kulcs. Az APK `debuggable=false`, az R8-optimalizálás bekapcsolva maradt.
 
