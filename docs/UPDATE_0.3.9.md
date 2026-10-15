@@ -32,4 +32,4 @@ npm.cmd run release:prepare
 
 A segéd ellenőrzi a csomagokat és előkészíti a `dist/release-assets-v<verzió>` nyolc fájlját, a `dist/website-pages` statikus oldalt és a verzióhoz tartozó feltöltési útmutatót. A nyolc fájl együtt kerüljön az új GitHub Release-be, az új tag például `v0.3.10`. A weboldalhoz a `website-pages` **tartalmát** töltsd a `main` gyökerébe. A kiadott tag alatti bináris fájlokat ne cseréld más tartalomra.
 
-A mérési eredmények és a tesztek határai: [Windows és összesített ellenőrzés](VALIDATION.md), [Android build és emulátor](mobile/ANDROID_BUILD_VALIDATION.md). Fizikai Android-készülékes próba és iOS build nem történt. A Windows telepítő helyi, Authenticode-aláírás nélküli csomag; az APK optimalizált, nem debuggolható, fejlesztői kulccsal aláírt Preview.
+A mérési eredmények és a tesztek határai: Windows és összesített ellenőrzés (`VALIDATION.md`), [Android build és emulátor](mobile/ANDROID_BUILD_VALIDATION.md). Fizikai Android-készülékes próba és iOS build nem történt. A Windows telepítő helyi, Authenticode-aláírás nélküli csomag; az APK optimalizált, nem debuggolható, fejlesztői kulccsal aláírt Preview.

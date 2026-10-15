@@ -1,6 +1,40 @@
 # Android ellenőrzés
 
-## Végleges 0.3.9 — 2026. október 14.
+## Végleges 0.3.10 — 2026. október 15.
+
+Elkészült a **Tracer 0.3.10** optimalizált Android APK, versionCode 3010. A név minden nyelven Tracer, a csomagazonosító `app.tracer.mobile.preview`, az aláíró a korábbi Preview-kulcs. Az APK `debuggable=false`, az R8-optimalizálás bekapcsolva maradt.
+
+| Ellenőrzés | Eredmény |
+|---|---|
+| Fordítás, R8, aláírás és csomagolás | Sikeres, érvényes v2 aláírás, API 28+, target SDK 35 |
+| Android lint | 0 hiba, 72 figyelmeztetés |
+| JVM-tesztek | 56/56 sikeres: a korábbi 49 teszt és 7 médiaeredet-/dokumentum-/adatkorlát-teszt |
+| Teljes natív futás | 19/19 sikeres, 66,038 másodperc, a végleges APK-n és a jelentésben rögzített teszt-APK-val |
+| Natív tesztcsoportok | 4 UI/olvashatóság, 2 APK/provider, 3 PackageInstaller Session, 2 szinkron, 4 alapértelmezett böngésző, 2 médiaszolgáltatás, 2 tényleges HTMLAudio-lejátszás |
+| Valódi háttérlejátszás | Nem néma PCM WAV a production WebView-ban; Home után, kikapcsolt képernyővel és értesítésből folytatva is halad a lejátszás, az Android `isMusicActive=true` értéket ad |
+| Médialejátszás életciklusa | Külső link új lapon és Surge mellett is szól; a lejátszó lap bezárása leállítja; másik fókuszkérés felfüggeszti |
+| Rendszerértesítés | Tényleges MediaSession, kezdeti pause PendingIntent, régi dokumentum-/tulajdonosakció elutasítása, sikertelen play utáni foreground-takarítás és szüneteltetett munkamenet updater-védelme sikeres |
+| Alapértelmezett böngésző | Tetszőleges host HTTP/HTTPS kezelője; valódi Android role-kérés határa, megszakítás és beállítási fallback ellenőrizve; a teszt nem változtatja meg a rendszer alapértelmezését |
+| Frissítés 0.3.9-ről | `adb install -r`, azonos UID és első telepítési idő; a teljes kontrollált profilbeállítás 447 bájtja változatlan |
+| APK és assetek | A Gradle-APK, kiadott másolat, checksum és metadata egyezik; mind a 6 asset/licenc mérete és hashértéke egyezik a forrással |
+| Fizikai készülék | Nem tesztelt; dedikált Pixel 7 / API 35 / Google APIs emulátor, naprakész tesztprofil |
+
+```text
+dist/Tracer-0.3.10-android-preview.apk
+Méret: 2 868 038 bájt
+SHA-256: 47c877683c05dc8a87e118edb6bd9301ba9e140c6e32e0d5ffb715666149bc03
+Aláíró tanúsítvány SHA-256: 89dc64757353ad72c710791927db7708d4e8bd1dc41d124b44a5dcce4fdf7bea
+```
+
+A végső hanglejátszásmérésben a Home alatt **1,715 mp**, kikapcsolt képernyőn **2,168 mp**, értesítésből folytatva **1,899 mp**, külső link és Surge mellett **1,851 mp** volt a lejátszási idő növekedése. Minden esetben aktív zenét jelzett az Android; képernyőzárnál `interactive=false`. A natív médiapanel valóban megnyílt és látható volt, a végleges screenshotot szemrevételeztük. A világos/sötét kezdőlapok is teljesen kirajzolódtak. A külső oldal szövegkontrasztja változatlanul 21:1, a keresőpanel mögött 6,245:1.
+
+Bizonyítékok: `artifacts/android-build-0.3.10.log`, `android-instrumentation-build-0.3.10.log`, `android-media-instrumentation-0.3.10.log` (külön 4/4 médiapróba), `android-instrumentation-0.3.10.log`, `android-instrumentation-0.3.10.json`, `android-package-0.3.10.json`, `sync-android-export-validation-0.3.10.log`, `artifacts/android-ui-0.3.10/`, `artifacts/android-media-0.3.10/` és `artifacts/android-emulator/upgrade-0.3.9-to-0.3.10/upgrade-final.json`. Az instrumentation-jelentés a production- és teszt-APK, a futási log, a tesztforrások, 12 UI-kép, 2 médiakép, a két nyers médiamérés, a két kontrasztmérés és a Session-mérés SHA-256 kötését is tartalmazza. Az aktuális másolt lint/JUnit/manifest/aláírás-jelentések a `mobile/testing/android-build-reports/` könyvtárban vannak; az előző teljes jelentés az `archive-0.3.9/` alkönyvtárban megmaradt.
+
+**Mérési határok:** a média egy helyben interceptált HTTPS-fixture nem néma WAV-fájlja, tényleges HTMLAudio-val és natív érintéses indítással. Nem használtunk felhasználói fiókot, és nem teszteltünk valódi szolgáltatói DRM-et, OAuth-ot vagy fizikai készülék hangkimenetét/energiakezelését. A PackageInstaller-próbákban továbbra is valódi Session létrehozás, írás, fsync és visszaolvasás történik, a visszafordíthatatlan commitot a teszt elfogja; tényleges csendes telepítést vagy jövőbeli GitHub-kiadásból végzett teljes frissítést ez a futás nem igazol. Aktív vagy szüneteltetett médialejátszási munkamenet megakadályozza az automatikus csomagcserét.
+
+Az első futások külön archivált logjaiban test-only nullable/public-API és aszinkron értesítéskészültségi hibák, valamint három szűk Preview R8-belépés hiánya látszik. A végleges 19-es futás ezek javítása után, frissen törölt és újramért outputokkal készült; a sikertelen futásokat nem számoltuk sikernek. A Preview megőrzési szabályai továbbra sem tartanak meg teljes Kotlin-, coroutine- vagy alkalmazáskönyvtárat, és nem vonatkoznak az éles Release buildre.
+
+## Korábbi végleges 0.3.9 — 2026. október 14.
 
 Elkészült a **Tracer 0.3.9** optimalizált Android APK, versionCode 3009. A felhasználói név minden nyelven Tracer, a meglévő `app.tracer.mobile.preview` csomagazonosító és aláírókulcs megmaradt.
 

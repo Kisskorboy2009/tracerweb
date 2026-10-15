@@ -37,4 +37,4 @@ A Bitwarden 2026.9.3 ellenőrzött csomagja kibontva 86,4 MB, és kötelező `co
 
 ## Telepítés és ellenőrzés
 
-Az új telepítő: Tracer 0.3.5 Windows x64 (`../dist/Tracer-Setup-0.3.5-x64.exe`). A telepítés után indítsd újra a Tracert. A futó böngészőt nem zárjuk be automatikusan. A végleges mérési eredmények és a csomag ellenőrzőösszege az [ellenőrzési jegyzőkönyvben](VALIDATION.md) szerepelnek.
+Az új telepítő: Tracer 0.3.5 Windows x64 (`../dist/Tracer-Setup-0.3.5-x64.exe`). A telepítés után indítsd újra a Tracert. A futó böngészőt nem zárjuk be automatikusan. A végleges mérési eredmények és a csomag ellenőrzőösszege az ellenőrzési jegyzőkönyvben (`VALIDATION.md`) szerepelnek.

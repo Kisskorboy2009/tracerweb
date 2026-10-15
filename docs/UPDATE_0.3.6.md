@@ -1,6 +1,6 @@
 # Tracer 0.3.6 — kattintható felső sáv, helyes előnézet és mentés másként
 
-A 0.3.6 a felső kezelősáv kattintásait, a letöltési buborék mögötti oldal előnézetét és a kézi fájlmentést javítja. **569/569 Node-teszt sikeres; a forrásból és a csomagolt alkalmazásból futó változat egyaránt 143 natív integrációs ellenőrzést teljesített.** Az újraindítási próba 11 ellenőrzést és 4 folyamatindítást teljesített. A telepítő tartalma és ellenőrzőösszege is ellenőrzött; bizonyítékok az [ellenőrzési jegyzőkönyvben](VALIDATION.md).
+A 0.3.6 a felső kezelősáv kattintásait, a letöltési buborék mögötti oldal előnézetét és a kézi fájlmentést javítja. **569/569 Node-teszt sikeres; a forrásból és a csomagolt alkalmazásból futó változat egyaránt 143 natív integrációs ellenőrzést teljesített.** Az újraindítási próba 11 ellenőrzést és 4 folyamatindítást teljesített. A telepítő tartalma és ellenőrzőösszege is ellenőrzött; bizonyítékok az ellenőrzési jegyzőkönyvben (`VALIDATION.md`).
 
 ## Felső sáv és kezdőlap
 
@@ -45,4 +45,4 @@ A 0.3.5 nagyobb bővítménykerete változatlan: **128 MiB tömörített CRX, 25
 
 Windows x64 telepítő: Tracer-Setup-0.3.6-x64.exe (`../dist/Tracer-Setup-0.3.6-x64.exe`), **155 816 894 bájt**. SHA-256: `dbac4b9c23fbd844a24ccb151b549bbf80628ade6f1e4e5faa9c360e573db655`. Az ellenőrzőösszeg a kiadási manifesttel és a `.sha256` kísérőfájllal egyezik. Futtasd kézzel a telepítőt, majd indítsd újra a Tracert. A futó böngészőt nem zárjuk be, és a gépre telepített példányt nem frissítjük automatikusan.
 
-A helyi fejlesztői NSIS telepítő **Authenticode-aláírás nélkül** készült; a mért állapot `NotSigned`, ezért a Windows ismeretlen kiadót jelezhet. A verzióhoz kötött végleges ellenőrzési eredmények az [ellenőrzési jegyzőkönyvben](VALIDATION.md) szerepelnek.
+A helyi fejlesztői NSIS telepítő **Authenticode-aláírás nélkül** készült; a mért állapot `NotSigned`, ezért a Windows ismeretlen kiadót jelezhet. A verzióhoz kötött végleges ellenőrzési eredmények az ellenőrzési jegyzőkönyvben (`VALIDATION.md`) szerepelnek.

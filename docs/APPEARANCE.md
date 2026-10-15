@@ -174,4 +174,4 @@ python scripts/wallpapers.py --verify
 
 Az Android és iOS forrás **nyolc natív palettát**, világos/sötét/rendszermódot, saját helyi képimportot és a hat alapgyorslinket tartalmazza. Ezek platformonként külön implementációk és külön importkorlátokkal dolgoznak; a teljes desktop-galériát és 17 palettát nem adják. Az APK/AAB/IPA build és fizikai eszközteszt ebben a Windows környezetben még nem futott. A konkrét buildparancsok és eszközellenőrzések a [mobil README-ben](mobile/README.md) szerepelnek.
 
-A tényleges Windows teszt-, Chromium- és csomagolási eredmények forrása a [VALIDATION.md](VALIDATION.md); ez a leírás az implementált viselkedést és annak korlátait dokumentálja.
+A tényleges Windows teszt-, Chromium- és csomagolási eredmények forrása a VALIDATION.md (`VALIDATION.md`); ez a leírás az implementált viselkedést és annak korlátait dokumentálja.

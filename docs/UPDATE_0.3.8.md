@@ -30,4 +30,4 @@ A kereső saját, elkülönített vezérlőt kapott. Az Electron 44 első keres�
 
 A tesztek normál YouTube-lejátszásnál percenként 120 periodikus DOM-vizsgálat, kikapcsolt Discordnál 30 időzítős ébresztés eltűnését igazolják. Ezek időzítőszámok, nem mért CPU- vagy RAM-százalékok. A natív lapkarbantartási próba három élő lapnézetből kettőt ténylegesen megsemmisít, és az aktívat megtartja. Az altatott oldal újratöltésekor a nem mentett űrlapállapot elveszhet.
 
-A Windows telepítő a `dist/Tracer-Setup-0.3.8-x64.exe` fájl. A futó Tracer bezárása után kézzel telepíthető. Android és iOS ehhez a Windows-frissítéshez nem kapott új kiadást. A részletes ellenőrzés a [jegyzőkönyvben](VALIDATION.md) található.
+A Windows telepítő a `dist/Tracer-Setup-0.3.8-x64.exe` fájl. A futó Tracer bezárása után kézzel telepíthető. Android és iOS ehhez a Windows-frissítéshez nem kapott új kiadást. A részletes ellenőrzés a jegyzőkönyvben (`VALIDATION.md`) található.

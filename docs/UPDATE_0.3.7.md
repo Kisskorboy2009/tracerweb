@@ -2,7 +2,7 @@
 
 A Tracer indításkor **maximalizált ablakban** nyílik meg, a Windows-tálca látható marad. Az oldal külön **F11**-gyel váltható teljes képernyőre. Új letöltéskor az ikon alatti panel automatikusan megjelenik; a támogatott alkalmazáshivatkozásokat a Windowsban regisztrált külön kliens nyitja meg.
 
-**605/605 Node-teszt sikeres, 0 hibával vagy kihagyással.** A forrásból és a végleges csomagolt alkalmazásból futó változat egyaránt **167 natív integrációs ellenőrzést** teljesített. Az újraindítási próba **11 ellenőrzést, 4 folyamatindítást** teljesített. A csomagtartalom, a telepítő mérete és SHA-256-a ellenőrzött; részletek az [ellenőrzési jegyzőkönyvben](VALIDATION.md).
+**605/605 Node-teszt sikeres, 0 hibával vagy kihagyással.** A forrásból és a végleges csomagolt alkalmazásból futó változat egyaránt **167 natív integrációs ellenőrzést** teljesített. Az újraindítási próba **11 ellenőrzést, 4 folyamatindítást** teljesített. A csomagtartalom, a telepítő mérete és SHA-256-a ellenőrzött; részletek az ellenőrzési jegyzőkönyvben (`VALIDATION.md`).
 
 ## Teljes képernyő és videó
 
@@ -51,4 +51,4 @@ Normál és privát ablakból használható az átadás. A külön kliens saját
 
 ## Kézi frissítés
 
-Windows x64 telepítő: Tracer-Setup-0.3.7-x64.exe (`../dist/Tracer-Setup-0.3.7-x64.exe`), **155 828 427 bájt**. SHA-256: `5a093f846c09d64f839b01e8c2a5cd0f946ca6a247b26a3f03c029cdc856738b`. A manifest és a `.sha256` kísérőfájl egyezik. Futtasd kézzel, majd indítsd újra a Tracert; automatikus telepítés nem történt. A helyi fejlesztői NSIS telepítő **Authenticode-aláírás nélkül** készült, mért állapota `NotSigned`, ezért a Windows ismeretlen kiadót jelezhet. A verzióhoz kötött mért ellenőrzési eredményeket a [VALIDATION.md](VALIDATION.md) tartalmazza.
+Windows x64 telepítő: Tracer-Setup-0.3.7-x64.exe (`../dist/Tracer-Setup-0.3.7-x64.exe`), **155 828 427 bájt**. SHA-256: `5a093f846c09d64f839b01e8c2a5cd0f946ca6a247b26a3f03c029cdc856738b`. A manifest és a `.sha256` kísérőfájl egyezik. Futtasd kézzel, majd indítsd újra a Tracert; automatikus telepítés nem történt. A helyi fejlesztői NSIS telepítő **Authenticode-aláírás nélkül** készült, mért állapota `NotSigned`, ezért a Windows ismeretlen kiadót jelezhet. A verzióhoz kötött mért ellenőrzési eredményeket a VALIDATION.md (`VALIDATION.md`) tartalmazza.
