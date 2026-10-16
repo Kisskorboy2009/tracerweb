@@ -1,0 +1,161 @@
+{
+  "verifiedAt": "2026-10-16",
+  "images": [
+    {
+      "id": "alpine-lake",
+      "name": "Alpesi tó",
+      "author": "Whubsch",
+      "sourceURL": "https://commons.wikimedia.org/wiki/File:Snyder_Lake_in_Glacier_National_Park.jpg",
+      "downloadURL": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Snyder_Lake_in_Glacier_National_Park.jpg",
+      "sourceFile": "alpine-lake.jpg",
+      "file": "alpine-lake.jpg",
+      "sourceSize": [
+        4000,
+        3000
+      ],
+      "sourceSHA256": "1c11dc483a48aa155b6aace317ff0ab4e4d655d1fad0e574445af37480bcab5a",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "nature"
+    },
+    {
+      "id": "misty-forest",
+      "name": "Ködös erdő",
+      "author": "Mar Mkrtchyan",
+      "sourceURL": "https://commons.wikimedia.org/wiki/File:Foggy_forest_hillside.jpg",
+      "downloadURL": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Foggy_forest_hillside.jpg",
+      "sourceFile": "misty-forest.jpg",
+      "file": "misty-forest.webp",
+      "sourceSize": [
+        6000,
+        4000
+      ],
+      "sourceSHA256": "0f6e691656e9f2fe3772ec2fac7ca0d593c6287899a3182f49135429fa0d767b",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "nature"
+    },
+    {
+      "id": "azure-canyon",
+      "name": "Azúr szurdok",
+      "author": "ObsydianX",
+      "sourceURL": "https://obsydianx.itch.io",
+      "downloadURL": "https://img.itch.zone/aW1hZ2UvMTUwODc0MC84NzkzODQxLmpwZw==/original/R7jwbT.jpg",
+      "sourceFile": "obsydianx-1.jpg",
+      "file": "azure-canyon.webp",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "sourceSHA256": "ce897f409a8b2a747e15b1edb9117dd601b27b3844634b47295204892c998597",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "illustration"
+    },
+    {
+      "id": "silver-peaks",
+      "name": "Ezüst hegyvidék",
+      "author": "ObsydianX",
+      "sourceURL": "https://obsydianx.itch.io",
+      "downloadURL": "https://img.itch.zone/aW1hZ2UvMTUwODc0MC84NzkzODQ0LmpwZw==/original/2VAhtm.jpg",
+      "sourceFile": "obsydianx-2.jpg",
+      "file": "silver-peaks.webp",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "sourceSHA256": "5a6ac07b967183cf316b893b6cadb3429167345f657e89a26614ce20f2e981bb",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "illustration"
+    },
+    {
+      "id": "manga-city",
+      "name": "Manga város",
+      "author": "Pavel Kutejnikov",
+      "sourceURL": "https://opengameart.org/content/manga-style-background",
+      "downloadURL": "https://opengameart.org/sites/default/files/manga_bg.7z",
+      "archiveFile": "manga-bg.7z",
+      "archiveMember": "manga_bg_01.png",
+      "archiveSHA256": "1c992756d2709e464772ca3f9c904a7b276ddfb5401fdd133abfdd71cbe3bc46",
+      "sourceFile": "manga-city.png",
+      "file": "manga-city.webp",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "sourceSHA256": "0ef477947fa90d6f541937a0624769e4e55862f44d290547cf7c68282bef600b",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "manga"
+    },
+    {
+      "id": "dusk-river",
+      "name": "Alkonyi folyó",
+      "author": "ObsydianX",
+      "sourceURL": "https://obsydianx.itch.io",
+      "downloadURL": "https://img.itch.zone/aW1hZ2UvMTUwODc0MC84NzkzODQ4LmpwZw==/original/CaIu%2Fl.jpg",
+      "sourceFile": "obsydianx-3.jpg",
+      "file": "dusk-river.webp",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "sourceSHA256": "045ee498fe15a0dc3ce356c4f28d0bf14e0230d3bad77ffc5117a248a1c35bee",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "illustration"
+    },
+    {
+      "id": "cliff-towers",
+      "name": "Sziklatornyok",
+      "author": "ObsydianX",
+      "sourceURL": "https://obsydianx.itch.io",
+      "downloadURL": "https://img.itch.zone/aW1hZ2UvMTUwODc0MC84NzkzODUxLmpwZw==/original/tJyTu5.jpg",
+      "sourceFile": "obsydianx-4.jpg",
+      "file": "cliff-towers.webp",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "sourceSHA256": "0262e2ff1f9c6849923e9f69e8d3c950b386af6e17651b8dcbea4b829e9eb281",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "illustration"
+    },
+    {
+      "id": "emerald-plains",
+      "name": "Smaragdmező",
+      "author": "ObsydianX",
+      "sourceURL": "https://obsydianx.itch.io",
+      "downloadURL": "https://img.itch.zone/aW1hZ2UvMTUwODc0MC84NzkzODU0LmpwZw==/original/Awc36s.jpg",
+      "sourceFile": "obsydianx-5.jpg",
+      "file": "emerald-plains.webp",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "sourceSHA256": "25972e5d9362921eba898fa019dbe7a8a8c837c9dc9f6f74ca74fa57467975d5",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "illustration"
+    },
+    {
+      "id": "stone-spires",
+      "name": "Kőoszlopok",
+      "author": "ObsydianX",
+      "sourceURL": "https://obsydianx.itch.io",
+      "downloadURL": "https://img.itch.zone/aW1hZ2UvMTUwODc0MC84NzkzODU4LmpwZw==/original/TYTo%2F%2F.jpg",
+      "sourceFile": "obsydianx-6.jpg",
+      "file": "stone-spires.webp",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "sourceSHA256": "4580c4228190a31f53bc0488db9923eff90ebbbea3e62ab454358b917351b29e",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "category": "illustration"
+    }
+  ]
+}

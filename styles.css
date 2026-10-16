@@ -1218,15 +1218,6 @@ kbd {
 .release-title h2 > .version-dot {
   color: var(--green);
 }
-.development-label {
-  display: inline-flex;
-  font-size: 10px;
-  letter-spacing: 0.7px;
-  color: #b6c4ab;
-  border: 1px solid #566448;
-  border-radius: 30px;
-  padding: 8px 12px;
-}
 .release-copy > p {
   font-size: 19px;
   line-height: 1.6;
