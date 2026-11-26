@@ -1,4 +1,5 @@
 'use strict';
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const navigation = document.querySelector('#navigation');
 const menuToggle = document.querySelector('.menu-toggle');
 function closeMenu() {
@@ -16,26 +17,73 @@ navigation.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeMenu();
 });
-window.matchMedia('(min-width: 761px)').addEventListener('change', (event) => {
+window.matchMedia('(min-width: 821px)').addEventListener('change', (event) => {
   if (event.matches) closeMenu();
 });
+
+// The hero address bar types what Tracer quietly takes care of.
+const typing = document.querySelector('#hero-typing');
+const phrases = [
+  'youtube.com — reklámok nélkül',
+  'hirek.hu — süti-ablak elutasítva',
+  'webshop.hu — 7 követő leállítva',
+  '38 lap nyitva — 31 alszik',
+  'jegyzet + videó — osztott nézetben',
+];
+if (!reducedMotion.matches) {
+  let phrase = 0,
+    length = phrases[0].length,
+    deleting = true;
+  const tick = () => {
+    const text = phrases[phrase];
+    length += deleting ? -1 : 1;
+    typing.textContent = text.slice(0, length);
+    let delay = deleting ? 22 : 48;
+    if (deleting && length === 0) {
+      deleting = false;
+      phrase = (phrase + 1) % phrases.length;
+      delay = 260;
+    } else if (!deleting && length === phrases[phrase].length) {
+      deleting = true;
+      delay = 2200;
+    }
+    setTimeout(tick, delay);
+  };
+  setTimeout(tick, 2600);
+}
+
+// Sections ease in once, the first time they scroll into view.
+const revealed = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries)
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealed.unobserve(entry.target);
+      }
+  },
+  { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+);
+document.querySelectorAll('.reveal').forEach((element) => revealed.observe(element));
+
 const shieldToggle = document.querySelector('#shield-toggle');
 shieldToggle.addEventListener('click', () => {
   const enabled = shieldToggle.getAttribute('aria-checked') !== 'true';
   shieldToggle.setAttribute('aria-checked', String(enabled));
+  document.querySelector('#shield-word').textContent = enabled ? 'BE' : 'KI';
   document.querySelector('#shield-state').textContent = enabled
     ? 'Védelem bekapcsolva'
     : 'Védelem kikapcsolva';
   document.querySelector('#demo-page').classList.toggle('protected', enabled);
   document.querySelector('#demo-message').textContent = enabled
-    ? 'A szemléltetett reklám és követő rejtve.'
-    : 'A szemléltetett reklám és követő látható.';
+    ? 'Minden zavaró elem rejtve.'
+    : 'Ezt látnád védelem nélkül.';
 });
 const worlds = {
+  plains: { image: 'emerald-plains.webp', label: 'Smaragd mező · CC0 illusztráció' },
   forest: { image: 'misty-forest.webp', label: 'Ködös erdő · CC0 fotó' },
   canyon: { image: 'azure-canyon.webp', label: 'Azúr szurdok · CC0 illusztráció' },
-  peaks: { image: 'silver-peaks.webp', label: 'Ezüst hegyvidék · CC0 illusztráció' },
   city: { image: 'manga-city.webp', label: 'Manga város · CC0 illusztráció' },
+  river: { image: 'dusk-river.webp', label: 'Alkonyi folyó · CC0 illusztráció' },
 };
 document.querySelectorAll('[data-world]').forEach((button) =>
   button.addEventListener('click', () => {
@@ -486,7 +534,7 @@ async function loadReleases() {
         link.removeAttribute('href');
         link.setAttribute('aria-disabled', 'true');
         link.classList.add('button-unavailable');
-        link.classList.remove('button-primary', 'button-secondary');
+        link.classList.remove('button-dark', 'button-light');
         link.querySelector('span').textContent = 'Még nem érhető el';
         link.querySelectorAll('svg').forEach((svg) => svg.remove());
       }

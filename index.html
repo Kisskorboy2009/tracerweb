@@ -3,19 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#111711" />
+    <meta name="theme-color" content="#f3f1ec" />
     <meta
       name="description"
-      content="Tracer. Kevesebb zaj. Több világ. Chromium alapú böngésző beépített reklámvédelemmel, személyre szabható kezdőlappal és helyi adatvédelmi eszközökkel."
+      content="Tracer: a böngésző, ami melletted áll. Beépített reklám- és követővédelem, osztott nézet, alvó lapok, saját világok. Ingyenes, Windowsra és Androidra."
     />
-    <meta property="og:title" content="Tracer — Saját tér. Szabad irány." />
+    <meta property="og:title" content="Tracer — A böngésző, ami melletted áll" />
     <meta
       property="og:description"
-      content="Ismerd meg a Tracert, és töltsd le az elérhető legújabb kiadást."
+      content="Reklámok nélkül, süti-ablakok nélkül, a saját világodban. Töltsd le a legújabb Tracert."
     />
     <meta property="og:type" content="website" />
-    <title>Tracer — Kevesebb zaj. Több világ.</title>
+    <title>Tracer — A böngésző, ami melletted áll</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/emerald-plains.webp" as="image" />
     <link rel="stylesheet" href="styles.css" />
     <script src="release-validation.js" defer></script>
     <script src="app.js" defer></script>
@@ -39,27 +40,21 @@
         <path d="M10 5h4m-3 14h2" />
       </symbol>
       <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" /></symbol>
-      <symbol id="tune" viewBox="0 0 24 24">
-        <path d="M4 7h5m4 0h7M4 17h9m4 0h3" />
-        <circle cx="11" cy="7" r="2" />
-        <circle cx="15" cy="17" r="2" />
+      <symbol id="search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="6.5" />
+        <path d="m16 16 4 4" />
       </symbol>
-      <symbol id="engine" viewBox="0 0 24 24">
-        <rect x="6" y="6" width="12" height="12" rx="2" />
-        <path d="M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3" />
-        <rect x="10" y="10" width="4" height="4" rx="1" />
+      <symbol id="lock" viewBox="0 0 24 24">
+        <rect x="5" y="10" width="14" height="10" rx="2.5" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
       </symbol>
-      <symbol id="ghost" viewBox="0 0 24 24">
-        <path d="M5 21V10a7 7 0 0 1 14 0v11l-3-2-4 2-4-2-3 2Z" />
-        <path d="M9 10v2m6-2v2" />
-      </symbol>
+      <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></symbol>
     </svg>
-    <header class="site-header">
-      <div class="nav-wrap container">
+
+    <div class="hero-frame">
+      <header class="site-header">
         <a class="brand" href="#" aria-label="Tracer kezdőlap"
-          ><img src="assets/tracer.svg" alt="" width="36" height="36" /><span
-            >tracer<span class="brand-dot">.</span></span
-          ></a
+          ><img src="assets/tracer.svg" alt="" width="30" height="30" /><span>tracer</span></a
         >
         <button
           class="menu-toggle"
@@ -70,326 +65,326 @@
           <span></span><span></span>
         </button>
         <nav id="navigation" aria-label="Fő navigáció">
-          <a href="#elmeny">Az élmény</a><a href="#vedelem">Védelem</a
-          ><a href="#megjelenes">Saját világod</a>
-          <a class="nav-download" href="#letoltes"
-            >Letöltés <svg aria-hidden="true" class="icon"><use href="#download" /></svg
-          ></a>
+          <a href="#miert">Miért Tracer</a><a href="#funkciok">Funkciók</a
+          ><a href="#vilagok">Világok</a><a href="#gyik">GYIK</a>
+          <a class="nav-download" href="#letoltes">Letöltés</a>
         </nav>
-      </div>
-    </header>
-    <main id="main">
-      <section class="hero container" aria-labelledby="hero-title">
-        <div class="hero-top">
-          <div>
+      </header>
+
+      <main id="main">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-sky" aria-hidden="true"></div>
+          <div class="hero-content">
             <a class="release-pill" href="#kiadas"
-              ><span class="live-dot"></span>
-              <span>Ismerd meg a Tracer <span data-version>0.3.2</span>-t</span>
-              <span aria-hidden="true">↗</span></a
+              ><span class="live-dot"></span>Új: Tracer <span data-version>0.4.5</span>
+              <span aria-hidden="true">→</span></a
             >
-            <h1 id="hero-title">
-              Kevesebb zaj.<br />
-              <span>Több világ.</span>
-            </h1>
-          </div>
-          <div class="hero-aside">
-            <div class="orbit-mark" aria-hidden="true">
-              <span class="orbit orbit-one"></span><span class="orbit orbit-two"></span
-              ><img src="assets/tracer.svg" alt="" />
+            <p class="hero-kicker">Ahol a web újra a tiéd</p>
+            <h1 id="hero-title">A böngésző,<br />ami melletted áll</h1>
+            <div class="hero-bar" aria-hidden="true">
+              <svg class="icon"><use href="#lock" /></svg>
+              <span class="hero-typing" id="hero-typing">youtube.com — reklámok nélkül</span
+              ><span class="caret"></span>
+              <span class="hero-bar-go"
+                ><svg class="icon"><use href="#arrow" /></svg
+              ></span>
             </div>
-            <p>
-              A web a te ritmusodban. Beépített védelem, nyugodt kezdőlap és egy böngésző, amelyben
-              otthon vagy.
-            </p>
-            <a class="button button-primary" id="hero-download" href="#letoltes"
-              ><svg aria-hidden="true" class="icon"><use href="#download" /></svg
-              ><span>Tracer letöltése</span
-              ><svg aria-hidden="true" class="icon button-arrow"><use href="#arrow" /></svg
-            ></a>
-            <span class="hero-note">Ingyenes. Saját tér. Szabad irány.</span>
-          </div>
-        </div>
-        <figure class="hero-product">
-          <div class="product-label">
-            <span><span class="live-dot"></span> ISMERŐS WEB. ÚJ NÉZŐPONT.</span
-            ><span>TRACER / <span data-version>0.3.2</span></span>
-          </div>
-          <div class="product-image">
-            <img
-              id="hero-screenshot"
-              src="assets/tracer-desktop.png"
-              width="1440"
-              height="920"
-              alt="A Tracer Windows böngésző valódi kezdőlapja, ködös erdő háttérrel, címsorral és adatvédelmi eszközökkel"
-              fetchpriority="high"
-            />
-          </div>
-          <figcaption>
-            <span>Valódi Tracer-felület. Minden részlet a saját ritmusodra hangolható.</span
-            ><a href="#megjelenes">Találd meg a stílusod <span aria-hidden="true">↗</span></a>
-          </figcaption>
-        </figure>
-      </section>
-      <div class="essentials container" aria-label="A Tracer alapjai">
-        <span
-          ><svg aria-hidden="true" class="icon"><use href="#shield" /></svg> Alapból bekapcsolt
-          védelem</span
-        ><span
-          ><svg aria-hidden="true" class="icon"><use href="#tune" /></svg> Személyre szabható
-          felület</span
-        ><span
-          ><svg aria-hidden="true" class="icon"><use href="#engine" /></svg> Chromium alapokon</span
-        ><span
-          ><svg aria-hidden="true" class="icon"><use href="#check" /></svg> Nincs szükség
-          előfizetésre</span
-        >
-      </div>
-      <section class="experience section container" id="elmeny" aria-labelledby="experience-title">
-        <div class="section-heading">
-          <span class="eyebrow">01 / A TE OLDALADON</span>
-          <h2 id="experience-title">
-            Nem csak megnyitod a webet.<br />
-            <span>Helyet csinálsz magadnak.</span>
-          </h2>
-          <p>
-            Kevesebb zavaró részlet. Több figyelem arra, amiért érkeztél. A Tracer a mindennapi
-            böngészést teszi személyesebbé.
-          </p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature feature-wide">
-            <div class="feature-copy">
-              <span class="feature-number">01</span>
-              <h3>Védelem az első kattintástól.</h3>
-              <p>
-                A Shields alapból szűri az ismert reklám- és követőkéréseket. A védelem
-                webhelyenként kézben tartható.
-              </p>
-              <a href="#vedelem" class="text-link"
-                >Ismerd meg a Shieldst
-                <svg aria-hidden="true" class="icon"><use href="#arrow" /></svg
-              ></a>
-            </div>
-            <div class="shield-art" aria-hidden="true">
-              <div class="shield-ring ring-outer"></div>
-              <div class="shield-ring ring-inner"></div>
-              <svg aria-hidden="true"><use href="#shield" /></svg
-              ><span class="shield-tag">SHIELDS ON</span
-              ><span class="request request-one">tracker.js <span>×</span></span
-              ><span class="request request-two">ad request <span>×</span></span
-              ><span class="request request-three">your content <span>✓</span></span>
-            </div>
-          </article>
-          <article class="feature feature-personal">
-            <span class="feature-number">02</span>
-            <h3>
-              A te hangulatod.<br />
-              A te kezdőlapod.
-            </h3>
-            <p>
-              17 paletta, rendszertéma, 14 kiemelőszín és saját háttérkép. Egy munkanap, egy este,
-              egy teljesen más világ.
-            </p>
-            <div class="color-orbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-            <a class="text-link" href="#megjelenes"
-              >Nézd meg a lehetőségeket
-              <svg aria-hidden="true" class="icon"><use href="#arrow" /></svg
-            ></a>
-          </article>
-          <article class="feature feature-focus">
-            <span class="feature-number">03</span>
-            <h3>
-              Több lap.<br />
-              Kevesebb szétszórtság.
-            </h3>
-            <p>
-              Parancspaletta, lapcsoportosítás, rögzítés és altatás. Folytasd ott, ahol abbahagytad.
-            </p>
-            <div class="command-example">
-              <span>Keress lapot vagy könyvjelzőt</span><kbd>Ctrl K</kbd>
-            </div>
-          </article>
-          <article class="feature feature-ghost">
-            <span class="feature-number">04</span
-            ><svg aria-hidden="true" class="ghost-art"><use href="#ghost" /></svg>
-            <h3>
-              Egy mozdulat.<br />
-              Tiszta indulás.
-            </h3>
-            <p>
-              A Ghost bezárja a lapokat és üríti a böngészési adatokat. A könyvjelzőid és
-              beállításaid megmaradnak.
-            </p>
-            <span class="key-hint"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Del</kbd></span>
-          </article>
-        </div>
-      </section>
-      <section class="privacy-section section" id="vedelem" aria-labelledby="privacy-title">
-        <div class="container privacy-layout">
-          <div class="privacy-copy">
-            <span class="eyebrow">02 / KEVESEBB NYOM</span>
-            <h2 id="privacy-title">
-              A figyelmed érték.<br />
-              <em>Tartsd meg magadnak.</em>
-            </h2>
-            <p>
-              A reklámvédelem a böngésző része. A Tracer szűri az ismert reklámhálózatokat és
-              követőket, előnyben részesíti a HTTPS-t, és helyben mutatja meg, mi történik egy
-              oldalon.
-            </p>
-            <div class="privacy-points">
-              <span
-                ><svg aria-hidden="true" class="icon"><use href="#check" /></svg> Bekapcsolt Shields
-                új profilban</span
-              ><span
-                ><svg aria-hidden="true" class="icon"><use href="#check" /></svg> Alapból rejtett
-                promóciós lapkák</span
-              ><span
-                ><svg aria-hidden="true" class="icon"><use href="#check" /></svg> Helyi Privacy
-                Receipt kimutatás</span
+            <div class="hero-actions">
+              <a class="button button-dark" id="hero-download" href="#letoltes"
+                ><svg aria-hidden="true" class="icon"><use href="#download" /></svg
+                ><span>Tracer letöltése</span></a
               >
+              <span class="hero-note">Ingyenes · Windows és Android · Regisztráció nélkül</span>
             </div>
-            <p class="small-note">
-              A szűrőlisták egy kattintással frissíthetők, és a védelem webhelyenként állítható.
-            </p>
           </div>
-          <div class="privacy-demo">
-            <div class="demo-heading">
-              <span class="demo-badge"
-                ><svg aria-hidden="true" class="icon"><use href="#shield" /></svg> TRACER
-                SHIELDS</span
-              ><span class="demo-caption">Interaktív szemléltetés</span>
-            </div>
-            <h3>A különbség egy kapcsolás.</h3>
-            <p>Kapcsold be a védelmet a bemutatóban.</p>
-            <button id="shield-toggle" class="shield-switch" role="switch" aria-checked="true">
-              <span
-                ><strong>Reklámok és követők szűrése</strong
-                ><small id="shield-state">Védelem bekapcsolva</small></span
-              ><i aria-hidden="true"></i>
-            </button>
-            <div class="demo-page protected" id="demo-page">
-              <div class="demo-page-top">
-                <span></span><span></span><span></span><b>egy nyugodtabb weboldal</b>
-              </div>
-              <div class="demo-content">
-                <div class="demo-editorial">
-                  <div class="demo-picture"></div>
-                  <b>Teret a fontos dolgoknak.</b><span></span><span></span>
-                </div>
-                <div class="demo-ad">
-                  <span>HIRDETÉS</span><strong>Ez a hely<br />a tartalomé is lehet.</strong>
-                  <div></div>
-                </div>
-              </div>
-              <div class="demo-tracker">
-                <span class="live-dot"></span
-                ><span id="demo-message">A szemléltetett reklám és követő rejtve.</span>
-              </div>
-            </div>
-            <p class="demo-footnote">Szemléltető bemutató.</p>
-          </div>
-        </div>
-      </section>
-      <section
-        class="appearance section container"
-        id="megjelenes"
-        aria-labelledby="appearance-title"
-      >
-        <div class="appearance-heading">
-          <div>
-            <span class="eyebrow">03 / ITT OTTHON VAGY</span>
-            <h2 id="appearance-title">
-              Egy böngésző.<br />
-              <span>Rengeteg saját világ.</span>
-            </h2>
-          </div>
-          <p>
-            A ködös erdőtől a manga városig. Válassz hangulatot a bemutatóban, a Tracerben pedig
-            alakítsd a teljes felületet magadra.
+          <ul class="hero-chips" aria-hidden="true">
+            <li class="chip chip-a"><span class="chip-dot"></span>Reklám eltüntetve</li>
+            <li class="chip chip-b"><span class="chip-dot"></span>Süti-ablak elutasítva</li>
+            <li class="chip chip-c"><span class="chip-dot"></span>3 követő leállítva</li>
+            <li class="chip chip-d"><span class="chip-dot"></span>Lap altatva · 412 MB szabad</li>
+            <li class="chip chip-e"><span class="chip-dot"></span>Reklám átugorva</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <div class="page">
+      <section class="intro section" id="miert" aria-labelledby="intro-title">
+        <div class="container narrow reveal">
+          <span class="eyebrow">Melletted áll</span>
+          <h2 id="intro-title">Te böngészel.<br /><span>A zajt mi intézzük.</span></h2>
+          <p class="lead">
+            A Tracer csendben elvégzi a webes háztartást: eltünteti a reklámokat, elutasítja a
+            süti-ablakokat, megállítja a követőket, és elaltatja a lapokat, amikre most nincs
+            szükséged. Neked csak az marad, amiért jöttél.
           </p>
         </div>
-        <div class="world-preview" id="world-preview">
-          <div class="world-top">
-            <img src="assets/tracer.svg" alt="" width="26" height="26" /><span>Új lap</span
-            ><span class="world-address">Keress vagy írj be egy webcímet</span
-            ><svg aria-hidden="true" class="icon"><use href="#shield" /></svg>
-          </div>
-          <div class="world-content">
-            <span class="world-time">09:41</span>
-            <div class="world-center">
-              <span class="world-logo">tracer.</span>
-              <h3>
-                Kevesebb zaj.<br />
-                <span>Több világ.</span>
-              </h3>
-              <div class="world-search">
-                <span>⌕</span> Google keresés vagy webcím… <span>↗</span>
-              </div>
-            </div>
-            <span class="world-caption" id="world-caption">Ködös erdő · CC0 fotó</span
-            ><span class="world-caption right">Kezdőlap-szemléltetés</span>
-          </div>
-        </div>
-        <div class="world-choices" role="group" aria-label="Háttér kiválasztása">
-          <button class="world-choice active" data-world="forest" aria-pressed="true">
-            <span class="world-thumb forest"></span
-            ><span>Ködös erdő<small>Egy kis csend.</small></span
-            ><i>↗</i></button
-          ><button class="world-choice" data-world="canyon" aria-pressed="false">
-            <span class="world-thumb canyon"></span
-            ><span>Azúr szurdok<small>Egy másik világ.</small></span
-            ><i>↗</i></button
-          ><button class="world-choice" data-world="peaks" aria-pressed="false">
-            <span class="world-thumb peaks"></span
-            ><span>Ezüst hegyvidék<small>Tiszta horizont.</small></span
-            ><i>↗</i></button
-          ><button class="world-choice" data-world="city" aria-pressed="false">
-            <span class="world-thumb city"></span
-            ><span>Manga város<small>Más perspektíva.</small></span
-            ><i>↗</i>
-          </button>
-        </div>
-        <div class="appearance-meta">
-          <span>17 paletta + rendszertéma</span><span>14 kiemelőszín</span><span>Saját képeid</span
-          ><span>Kapcsolható kezdőlapelemek</span>
+        <figure class="showcase container reveal">
+          <div class="showcase-glow" aria-hidden="true"></div>
+          <img
+            id="hero-screenshot"
+            src="assets/tracer-desktop.png"
+            width="1440"
+            height="920"
+            loading="lazy"
+            alt="A Tracer Windows böngésző kezdőlapja ködös erdő háttérrel, címsorral és adatvédelmi eszközökkel"
+          />
+          <span class="callout callout-left"
+            ><svg aria-hidden="true" class="icon"><use href="#shield" /></svg>Alapból bekapcsolt
+            védelem</span
+          >
+          <span class="callout callout-right"
+            ><svg aria-hidden="true" class="icon"><use href="#check" /></svg>Chrome-bővítmények
+            is</span
+          >
+        </figure>
+        <div class="stats container reveal" aria-label="A Tracer számokban">
+          <div><strong>0</strong><span>követőszkript a weboldalon és a böngészőben</span></div>
+          <div><strong>2</strong><span>lap egymás mellett osztott nézetben</span></div>
+          <div><strong>10+</strong><span>saját világ a kezdőlapra</span></div>
+          <div><strong>0 Ft</strong><span>előfizetés, örökké</span></div>
         </div>
       </section>
-      <section class="download-section section" id="letoltes" aria-labelledby="download-title">
-        <div class="container">
-          <div class="download-heading">
-            <span class="eyebrow">04 / A KÖVETKEZŐ OLDALAD</span>
-            <h2 id="download-title">Indulj el<br /><span>a saját irányodba.</span></h2>
+
+      <section class="privacy section" id="vedelem" aria-labelledby="privacy-title">
+        <div class="container privacy-grid">
+          <div class="privacy-copy reveal">
+            <span class="eyebrow eyebrow-light">Adatvédelem alapból</span>
+            <h2 id="privacy-title">Figyeld,<br /><span>ahogy eltűnik.</span></h2>
             <p>
-              Válaszd ki az eszközöd. Az elérhető csomagok közvetlenül innen tölthetők le,
-              előfizetés és regisztráció nélkül.
+              Reklámok, követők, süti-ablakok: a Tracer már betöltés közben kiszűri őket. A
+              YouTube-reklámok el sem indulnak, a süti-ablakokat a böngésző elutasítja helyetted.
+              Kapcsold ki, és nézd meg, mit szoktál meg.
+            </p>
+            <button id="shield-toggle" class="shield-switch" role="switch" aria-checked="true">
+              <span class="switch-track"><span class="switch-thumb"></span></span>
+              <span class="switch-label"
+                >Védelem <strong id="shield-word">BE</strong
+                ><small id="shield-state">Védelem bekapcsolva</small></span
+              >
+            </button>
+          </div>
+          <div class="demo-window reveal" aria-hidden="true">
+            <div class="demo-bar">
+              <span></span><span></span><span></span>
+              <div class="demo-address">
+                <svg class="icon"><use href="#lock" /></svg>hirek.pelda.hu/cikk
+              </div>
+            </div>
+            <div class="demo-page protected" id="demo-page">
+              <div class="demo-ad demo-ad-top">HIRDETÉS · Nyerj most egy telefont!</div>
+              <div class="demo-article">
+                <b class="demo-title"></b>
+                <span class="demo-image"></span>
+                <i class="line w80"></i><i class="line w95"></i><i class="line w70"></i>
+                <div class="demo-ad demo-ad-side">HIRDETÉS</div>
+                <i class="line w90"></i><i class="line w60"></i><i class="line w85"></i>
+              </div>
+              <div class="demo-cookie">
+                <strong>Sütiket használunk</strong>
+                <span>Elfogadod az összes partnerünket?</span>
+                <b>Elfogadom</b>
+              </div>
+              <div class="demo-trackers">
+                <span>tracker.pelda</span><span>pixel.reklam</span><span>analitika.io</span>
+              </div>
+              <div class="demo-badge">
+                <span id="demo-message">Minden zavaró elem rejtve.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features section" id="funkciok" aria-labelledby="features-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Minden a helyén</span>
+            <h2 id="features-title">Kevesebb kattintás.<br /><span>Több figyelem.</span></h2>
+          </div>
+          <div class="bento">
+            <article class="tile tile-wide reveal">
+              <div class="tile-art art-split" aria-hidden="true">
+                <div class="pane"><i></i><i></i><i></i></div>
+                <span class="divider"></span>
+                <div class="pane"><i></i><i></i><i></i></div>
+              </div>
+              <h3>Osztott nézet</h3>
+              <p>
+                Két lap egymás mellett: jegyzet és videó, összehasonlítás, chat és munka. A csík
+                húzható, egy kattintással bezárható.
+              </p>
+            </article>
+            <article class="tile reveal">
+              <div class="tile-art art-sleep" aria-hidden="true">
+                <span class="moon"></span>
+                <span class="meter"><i></i></span>
+              </div>
+              <h3>Alvó lapok</h3>
+              <p>
+                A rég nem nézett lapok elalszanak, és felszabadítják a memóriát. Az ikonjuk és a
+                helyük megmarad.
+              </p>
+            </article>
+            <article class="tile reveal">
+              <div class="tile-art art-play" aria-hidden="true">
+                <span class="play"></span><span class="skip">Reklám átugorva</span>
+              </div>
+              <h3>YouTube reklám nélkül</h3>
+              <p>
+                A reklámok jellemzően el sem indulnak, a mégis megjelenőt a Tracer azonnal áttekeri.
+              </p>
+            </article>
+            <article class="tile reveal">
+              <div class="tile-art art-drag" aria-hidden="true">
+                <span class="file">PDF</span><span class="cursor"></span>
+              </div>
+              <h3>Letöltés, húzással</h3>
+              <p>
+                A kész letöltést egyszerűen kihúzhatod az asztalra, egy mappába vagy egy
+                feltöltőmezőbe.
+              </p>
+            </article>
+            <article class="tile tile-dark reveal">
+              <div class="tile-art art-ghost" aria-hidden="true"><span class="ghost"></span></div>
+              <h3>Ghost és Tor-ablak</h3>
+              <p>
+                Egy kattintással nyomtalanul törölhetsz, a Tor-ablak pedig külön, elszigetelt úton
+                visz.
+              </p>
+            </article>
+            <article class="tile tile-wide reveal">
+              <div class="tile-art art-import" aria-hidden="true">
+                <span class="src">Chrome</span><span class="src">Brave</span
+                ><span class="src">Edge</span><span class="arrow"></span
+                ><span class="dst"><img src="assets/tracer.svg" alt="" /></span>
+              </div>
+              <h3>Költözz át egy perc alatt</h3>
+              <p>
+                Könyvjelzők, előzmények és mentett fiókok áthozatala Chrome-ból, Brave-ből vagy
+                Edge-ből, előnézettel, adattípusonként válogatva.
+              </p>
+            </article>
+            <article class="tile reveal">
+              <div class="tile-art art-store" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <h3>Bővítmények</h3>
+              <p>
+                Chrome Web Store-bővítmények engedélyjóváhagyással, és saját válogatás a Tracer
+                Store-ban.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="ticker" aria-label="Amit a Tracer elintéz helyetted">
+        <div class="ticker-row">
+          <div class="ticker-track">
+            <span>Süti-ablak elutasítva</span><span>Reklám eltüntetve</span
+            ><span>Követő leállítva</span><span>Lap elaltatva</span><span>HTTPS-re váltva</span
+            ><span>Követőparaméter törölve</span><span>YouTube-reklám átugorva</span
+            ><span>Letöltés kész</span>
+          </div>
+          <div class="ticker-track" aria-hidden="true">
+            <span>Süti-ablak elutasítva</span><span>Reklám eltüntetve</span
+            ><span>Követő leállítva</span><span>Lap elaltatva</span><span>HTTPS-re váltva</span
+            ><span>Követőparaméter törölve</span><span>YouTube-reklám átugorva</span
+            ><span>Letöltés kész</span>
+          </div>
+        </div>
+        <div class="ticker-row reverse" aria-hidden="true">
+          <div class="ticker-track">
+            <span>Osztott nézet</span><span>Saját háttérkép</span><span>Tor-ablak</span
+            ><span>Ghost törlés</span><span>Chrome-bővítmények</span><span>Lapkezelő</span
+            ><span>Mentett fiókok</span><span>Discord-állapot</span>
+          </div>
+          <div class="ticker-track">
+            <span>Osztott nézet</span><span>Saját háttérkép</span><span>Tor-ablak</span
+            ><span>Ghost törlés</span><span>Chrome-bővítmények</span><span>Lapkezelő</span
+            ><span>Mentett fiókok</span><span>Discord-állapot</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="worlds section" id="vilagok" aria-labelledby="worlds-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Saját világ</span>
+            <h2 id="worlds-title">Nyiss egy lapot.<br /><span>Érkezz meg valahova.</span></h2>
+            <p class="lead">
+              A kezdőlap nem üres fehér doboz: válassz festett tájat vagy saját képet, színt,
+              elrendezést. Minden háttérkép szabad felhasználású.
+            </p>
+          </div>
+          <div class="world-preview reveal" id="world-preview">
+            <div class="world-ui" aria-hidden="true">
+              <span class="world-clock">09:41</span>
+              <span class="world-search"
+                ><svg class="icon"><use href="#search" /></svg>Keress vagy írj be egy címet</span
+              >
+              <span class="world-shortcuts"><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+            <span class="world-caption" id="world-caption">Smaragd mező · CC0 illusztráció</span>
+          </div>
+          <div class="world-picker reveal" role="group" aria-label="Háttérkép választása">
+            <button class="active" type="button" data-world="plains" aria-pressed="true">
+              <img src="assets/emerald-plains.webp" alt="" loading="lazy" /><span
+                >Smaragd mező</span
+              >
+            </button>
+            <button type="button" data-world="forest" aria-pressed="false">
+              <img src="assets/misty-forest.webp" alt="" loading="lazy" /><span>Ködös erdő</span>
+            </button>
+            <button type="button" data-world="canyon" aria-pressed="false">
+              <img src="assets/azure-canyon.webp" alt="" loading="lazy" /><span>Azúr szurdok</span>
+            </button>
+            <button type="button" data-world="city" aria-pressed="false">
+              <img src="assets/manga-city.webp" alt="" loading="lazy" /><span>Manga város</span>
+            </button>
+            <button type="button" data-world="river" aria-pressed="false">
+              <img src="assets/dusk-river.webp" alt="" loading="lazy" /><span>Alkonyi folyó</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="download section" id="letoltes" aria-labelledby="download-title">
+        <div class="container">
+          <div class="section-head center reveal">
+            <span class="eyebrow">Letöltés</span>
+            <h2 id="download-title">Indulj el<br /><span>a saját irányodba.</span></h2>
+            <p class="lead">
+              Válaszd ki az eszközöd. Előfizetés és regisztráció nélkül, a csomagokhoz
+              ellenőrzőösszeg tartozik.
             </p>
           </div>
           <div class="download-grid">
-            <article class="download-card" data-platform="windows">
+            <article class="download-card featured reveal" data-platform="windows">
               <div class="platform-top">
                 <svg aria-hidden="true" class="platform-icon"><use href="#windows" /></svg
                 ><span class="platform-badge" data-status>Betöltés</span>
               </div>
               <h3>Windows</h3>
-              <p class="platform-description">A teljes Tracer-élmény<br />a számítógépeden.</p>
+              <p class="platform-description">A teljes Tracer-élmény a számítógépeden.</p>
               <div class="release-meta" data-meta>Windows 10 / 11 · x64</div>
-              <a class="button button-primary platform-download" data-download href="#kiadas"
+              <a class="button button-dark platform-download" data-download href="#kiadas"
                 ><svg aria-hidden="true" class="icon"><use href="#download" /></svg
                 ><span>Letöltés ellenőrzése</span></a
               >
               <p class="platform-note" data-note>A kiadás adatai betöltés alatt.</p>
               <a class="checksum-link" data-checksum hidden>Ellenőrzőösszeg · SHA-256 ↗</a>
             </article>
-            <article class="download-card" data-platform="android">
+            <article class="download-card reveal" data-platform="android">
               <div class="platform-top">
                 <svg aria-hidden="true" class="platform-icon"><use href="#phone" /></svg
                 ><span class="platform-badge" data-status>Betöltés</span>
               </div>
               <h3>Android</h3>
-              <p class="platform-description">Saját tér,<br />amikor úton vagy.</p>
+              <p class="platform-description">Saját tér, amikor úton vagy.</p>
               <div class="release-meta" data-meta>Android 9 vagy újabb</div>
-              <a class="button button-primary platform-download" data-download href="#kiadas"
+              <a class="button button-light platform-download" data-download href="#kiadas"
                 ><span>Kiadás ellenőrzése</span
                 ><svg aria-hidden="true" class="icon"><use href="#arrow" /></svg
               ></a>
@@ -399,13 +394,13 @@
                 >Android telepítési útmutató ↗</a
               >
             </article>
-            <article class="download-card" data-platform="ios">
+            <article class="download-card reveal" data-platform="ios">
               <div class="platform-top">
                 <svg aria-hidden="true" class="platform-icon"><use href="#phone" /></svg
                 ><span class="platform-badge" data-status>Fejlesztés alatt</span>
               </div>
-              <h3>iPhone & iPad</h3>
-              <p class="platform-description">A következő fejezet<br />még készül.</p>
+              <h3>iPhone &amp; iPad</h3>
+              <p class="platform-description">A következő fejezet még készül.</p>
               <div class="release-meta" data-meta>iOS / iPadOS</div>
               <div class="button button-unavailable">Még nem érhető el</div>
               <p class="platform-note" data-note>
@@ -422,183 +417,189 @@
               <a href="releases.json">kiadási jegyzékben</a> találhatók.
             </p></noscript
           >
-          <div class="default-callout">
-            <div class="default-icon">
-              <svg aria-hidden="true" class="icon"><use href="#check" /></svg>
-            </div>
-            <div>
-              <h3>A mindennapi böngésződ is lehet.</h3>
-              <p>
-                Telepítés után a Tracer beállításaiban válaszd az
-                <strong>„Legyen a Tracer az alapértelmezett”</strong> lehetőséget. A rendszer saját
-                ablakában véglegesítheted a választásod.
-              </p>
-            </div>
-            <a href="#gyik" class="text-link"
-              >Így működik <svg aria-hidden="true" class="icon"><use href="#arrow" /></svg
-            ></a>
-          </div>
         </div>
       </section>
-      <section
-        class="release-section section container"
-        id="kiadas"
-        aria-labelledby="release-title"
-      >
-        <div class="release-title">
-          <span class="eyebrow">A LEGFRISSEBB FEJEZET</span>
-          <h2 id="release-title">
-            Tracer <span data-version>0.3.2</span><span class="version-dot">.</span>
-          </h2>
-        </div>
-        <div class="release-copy">
-          <p>
-            Teljesen megújult felület, sokkal több animációval – és mégis kevesebb háttérmunkával. A
-            Tracer tétlenül nem dolgozik, így a laptopod akkuja is tovább bírja.
-          </p>
-          <ul>
-            <li>Újratervezett lapok, menük, panelek és kezdőlap, finom animációkkal.</li>
-            <li>Gyakran látogatott oldalak a kezdőlapon és négy új háttérkép.</li>
-            <li>Egykattintásos frissítés: telepítés és újraindítás a lapjaiddal együtt.</li>
-            <li>Megújult Android kezdőlap, felcsúszó menük és áttűnő fülváltás.</li>
-            <li>Kevesebb processzormunka oldalbetöltés közben, Windowson és Androidon is.</li>
+
+      <section class="release section" id="kiadas" aria-labelledby="release-title">
+        <div class="container release-grid reveal">
+          <div>
+            <span class="eyebrow">Legfrissebb kiadás</span>
+            <h2 id="release-title">Tracer <span data-version>0.4.5</span></h2>
+            <p class="lead">
+              A Tracer magától frissül: a letöltés a háttérben történik, a telepítés a következő
+              bezáráskor, a lapjaid megmaradnak.
+            </p>
+          </div>
+          <ul class="release-list">
+            <li>Osztott nézet: két lap egymás mellett, húzható elválasztóval.</li>
+            <li>A lapok ikonja alvó, visszaállított és visszanyitott lapon is megmarad.</li>
+            <li>Erősebb YouTube-védelem: reklámmentes lejátszás és automatikus helyreállítás.</li>
+            <li>A kész letöltések kihúzhatók az asztalra vagy egy mappába.</li>
+            <li>Egy lap bezárása már nem zárja be a belőle megnyitott lapokat.</li>
           </ul>
         </div>
       </section>
-      <section class="faq section container" id="gyik" aria-labelledby="faq-title">
-        <div>
-          <span class="eyebrow">TISZTÁN, EGYSZERŰEN</span>
-          <h2 id="faq-title">Még egy<br /><span>pár részlet.</span></h2>
+
+      <section class="faq section" id="gyik" aria-labelledby="faq-title">
+        <div class="container faq-grid">
+          <div class="reveal">
+            <span class="eyebrow">GYIK</span>
+            <h2 id="faq-title">Még egy<br /><span>pár részlet.</span></h2>
+            <p class="lead">Nem találod a választ? Írj a készítőknek a lap alján lévő oldalakon.</p>
+          </div>
+          <div class="faq-list reveal">
+            <details>
+              <summary>Mi a Tracer?</summary>
+              <p>
+                Egy Chromium alapú, ingyenes böngésző Windowsra és Androidra. Beépített reklám- és
+                követővédelemmel, süti-ablak-kezeléssel, osztott nézettel, alvó lapokkal,
+                Tor-ablakkal és személyre szabható kezdőlappal érkezik.
+              </p>
+            </details>
+            <details>
+              <summary>Hogyan állítom be alapértelmezett böngészőnek?</summary>
+              <p>
+                Windows alatt telepítsd a Tracert az innen letöltött telepítővel. A Tracer
+                Beállítások paneljén kattints a „Legyen a Tracer az alapértelmezett” gombra, majd a
+                Windows beállításaiban válaszd a Tracert a HTTP és HTTPS hivatkozásokhoz. Androidon
+                a Tracer beállításaiból nyitható meg a rendszer böngészőválasztója.
+              </p>
+            </details>
+            <details>
+              <summary>Tényleg blokkolja a reklámokat?</summary>
+              <p>
+                A védelem alapból aktív: hálózati szabályokkal szűri az ismert reklám- és
+                követőkéréseket, és célzott webhelyvédelmet is alkalmaz. A webhelyek, különösen a
+                videószolgáltatók folyamatosan változnak, ezért minden reklám eltűnésére nincs
+                garancia. Ha egy oldal hibásan működik, a védelmet webhelyenként módosíthatod.
+              </p>
+            </details>
+            <details>
+              <summary>Minden Chrome-bővítmény működik?</summary>
+              <p>
+                A kompatibilis csomagokat Chrome Web Store-hivatkozással vagy mappából telepítheted,
+                engedélyjóváhagyás után. Az Electron motor Chrome API-támogatása részleges.
+                <a href="docs/CHROME_COMPATIBILITY.md"
+                  >A pontos kompatibilitási állapot itt olvasható.</a
+                >
+              </p>
+            </details>
+            <details>
+              <summary>Hogyan használom az osztott nézetet?</summary>
+              <p>
+                Kattints jobb gombbal egy lapra, és válaszd a „Megnyitás osztott nézetben”
+                lehetőséget: a két lap egymás mellé kerül. A középső csíkot húzva méretezhetsz,
+                dupla kattintással középre áll. A lap helyi menüjéből zárhatod be.
+              </p>
+            </details>
+            <details>
+              <summary>Miért figyelmeztet a Windows telepítéskor?</summary>
+              <p>
+                A telepítő még nincs kódaláíró tanúsítvánnyal aláírva, ezért a SmartScreen
+                ismeretlen kiadót jelezhet. A „További információ” majd a „Futtatás mindenképp”
+                gombbal folytathatod; a letöltés ellenőrzőösszege a letöltési kártyán található.
+              </p>
+            </details>
+            <details>
+              <summary>Áthozhatom a könyvjelzőimet?</summary>
+              <p>
+                Windows alatt a Tracer helyi Brave, Chrome és Edge profilokat, valamint kompatibilis
+                exportfájlokat fogad. Az import előtt adattípusonként megtekintheted, mi kerül át. A
+                bejelentkezési cookie-k és más böngészők titkosított jelszó-adatbázisai nem
+                másolódnak át.
+              </p>
+            </details>
+            <details>
+              <summary>Mit töröl a Ghost?</summary>
+              <p>
+                Lezárja a lapokat és letöltéseket, üríti a böngészőtárakat, a helyi előzményeket és
+                a lapikonokat. A könyvjelzők, megjelenési beállítások, saját háttérképek,
+                titkosított fióktár és a már lementett fájlok megmaradnak.
+              </p>
+            </details>
+          </div>
         </div>
-        <div class="faq-list">
-          <details>
-            <summary>Hogyan állítom be alapértelmezett böngészőnek?<span>+</span></summary>
-            <p>
-              Windows alatt telepítsd a Tracert az innen letöltött telepítővel. A Tracer Beállítások
-              paneljén kattints a „Legyen a Tracer az alapértelmezett” gombra, majd a Windows
-              beállításaiban válaszd a Tracert a HTTP és HTTPS hivatkozásokhoz. Androidon a Tracer
-              beállításaiból nyitható meg a rendszer böngészőválasztója. A választást mindig te
-              véglegesíted.
-            </p>
-          </details>
-          <details>
-            <summary>Hallgathatok zenét lezárt telefonon?<span>+</span></summary>
-            <p>
-              Androidon indítsd el a zenét egy normál lapon, majd válts másik alkalmazásra vagy zárd
-              le a kijelzőt. Az értesítésből szüneteltetheted és folytathatod; a lejátszó lap
-              bezárása leállítja a zenét. A Beállítások „Háttérben lejátszás” kapcsolója alapból
-              bekapcsolt. A webhely saját lejátszási és hozzáférési feltételei érvényesek.
-            </p>
-          </details>
-          <details>
-            <summary>Tényleg blokkolja a reklámokat?<span>+</span></summary>
-            <p>
-              A Shields alapból aktív: hálózati szabályokkal szűri az ismert reklám- és
-              követőkéréseket, és célzott webhelyvédelmet is alkalmaz. A webhelyek, különösen a
-              videószolgáltatók folyamatosan változnak, ezért minden reklám eltűnésére nincs
-              garancia. Ha egy oldal hibásan működik, a védelmet webhelyenként módosíthatod.
-            </p>
-          </details>
-          <details>
-            <summary>Minden Chrome-bővítmény működik?<span>+</span></summary>
-            <p>
-              A kompatibilis csomagokat Chrome Web Store-hivatkozással vagy mappából telepítheted,
-              engedélyjóváhagyás után. Az Electron motor Chrome API-támogatása részleges; a Proton
-              Pass jelenleg nem támogatott.
-              <a href="docs/CHROME_COMPATIBILITY.md"
-                >A pontos kompatibilitási állapot itt olvasható.</a
+      </section>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <div class="closing-frame reveal">
+          <img src="assets/tracer.svg" alt="" width="56" height="56" />
+          <h2 id="closing-title">Saját tér.<br />Szabad irány.</h2>
+          <a class="button button-light" href="#letoltes"
+            ><svg aria-hidden="true" class="icon"><use href="#download" /></svg
+            ><span>Tracer letöltése</span></a
+          >
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-marquee" aria-hidden="true">
+          <div class="footer-track">
+            <span>tracer</span><span>tracer</span><span>tracer</span><span>tracer</span
+            ><span>tracer</span><span>tracer</span>
+          </div>
+          <div class="footer-track">
+            <span>tracer</span><span>tracer</span><span>tracer</span><span>tracer</span
+            ><span>tracer</span><span>tracer</span>
+          </div>
+        </div>
+        <div class="container footer-row">
+          <a class="brand" href="#"
+            ><img src="assets/tracer.svg" alt="" width="26" height="26" /><span>tracer</span></a
+          >
+          <div class="footer-info">
+            <span>© 2026 Tracer · A web, a te ritmusodban.</span>
+            <span class="creator-credit"
+              >Készítette:
+              <a href="https://kisskorboy.hu" target="_blank" rel="noopener noreferrer"
+                >Kisskorboy</a
               >
-            </p>
-          </details>
-          <details>
-            <summary>Miért figyelmeztet a Windows telepítéskor?<span>+</span></summary>
-            <p>
-              A telepítő még nincs kódaláíró tanúsítvánnyal aláírva, ezért a SmartScreen ismeretlen
-              kiadót jelezhet. A „További információ” majd a „Futtatás mindenképp” gombbal
-              folytathatod; a letöltés ellenőrzőösszege a letöltési kártyán található. iPhone-ra és
-              iPadre még nincs telepíthető kiadás.
-            </p>
-          </details>
-          <details>
-            <summary>Áthozhatom a könyvjelzőimet?<span>+</span></summary>
-            <p>
-              Windows alatt a Tracer helyi Brave, Chrome és Edge profilokat, valamint kompatibilis
-              exportfájlokat fogad. Az import előtt adattípusonként megtekintheted, mi kerül át. A
-              bejelentkezési cookie-k és más böngészők titkosított jelszó-adatbázisai nem másolódnak
-              át.
-            </p>
-          </details>
-          <details>
-            <summary>Mit töröl a Ghost?<span>+</span></summary>
-            <p>
-              Lezárja a lapokat és letöltéseket, üríti a böngészőtárakat és helyi előzményeket. A
-              könyvjelzők, megjelenési beállítások, saját háttérképek, titkosított fióktár és már
-              lementett fájlok megmaradnak.
-            </p>
-          </details>
+              és
+              <a href="https://kounee.hu" target="_blank" rel="noopener noreferrer">Kounee</a
+              >.</span
+            >
+          </div>
+          <div class="footer-links" aria-label="Weboldal információi">
+            <button
+              class="footer-link"
+              id="privacy-open"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="privacy-dialog"
+            >
+              Adatvédelem
+            </button>
+            <button
+              class="footer-link"
+              type="button"
+              data-document="docs/LICENSE"
+              aria-haspopup="dialog"
+              aria-controls="document-dialog"
+            >
+              Licenc
+            </button>
+            <button
+              class="footer-link"
+              type="button"
+              data-document="docs/THIRD_PARTY_NOTICES.md"
+              aria-haspopup="dialog"
+              aria-controls="document-dialog"
+            >
+              Források és licencek
+            </button>
+          </div>
         </div>
-      </section>
-      <section class="closing container">
-        <img src="assets/tracer.svg" alt="" width="58" height="58" />
-        <h2>
-          Saját tér.<br />
-          <span>Szabad irány.</span>
-        </h2>
-        <a class="button button-primary" href="#letoltes"
-          >Találkozz a Tracerrel <svg aria-hidden="true" class="icon"><use href="#arrow" /></svg></a
-        ><span class="closing-word" aria-hidden="true">tracer.</span>
-      </section>
-    </main>
-    <footer class="site-footer container">
-      <a class="brand" href="#"
-        ><img src="assets/tracer.svg" alt="" width="30" height="30" /><span>tracer.</span></a
-      >
-      <div class="footer-info">
-        <span>© 2026 Tracer · A web, a te ritmusodban.</span>
-        <span class="creator-credit"
-          >Készítette:
-          <a href="https://kisskorboy.hu" target="_blank" rel="noopener noreferrer">Kisskorboy</a>
-          és <a href="https://kounee.hu" target="_blank" rel="noopener noreferrer">Kounee</a>.</span
-        >
-      </div>
-      <div class="footer-links" aria-label="Weboldal információi">
-        <button
-          class="footer-link"
-          id="privacy-open"
-          type="button"
-          aria-haspopup="dialog"
-          aria-controls="privacy-dialog"
-        >
-          Adatvédelem
-        </button>
-        <button
-          class="footer-link"
-          type="button"
-          data-document="docs/LICENSE"
-          aria-haspopup="dialog"
-          aria-controls="document-dialog"
-        >
-          Licenc
-        </button>
-        <button
-          class="footer-link"
-          type="button"
-          data-document="docs/THIRD_PARTY_NOTICES.md"
-          aria-haspopup="dialog"
-          aria-controls="document-dialog"
-        >
-          Források és licencek
-        </button>
-      </div>
-    </footer>
+      </footer>
+    </div>
+
     <dialog id="privacy-dialog" aria-labelledby="privacy-dialog-title">
       <button class="dialog-close" id="privacy-close" type="button" aria-label="Bezárás" autofocus>
         ×</button
-      ><span class="eyebrow">HELYI ÉS EGYSZERŰ</span>
+      ><span class="eyebrow">Helyi és egyszerű</span>
       <h2 id="privacy-dialog-title">Erről a weboldalról.</h2>
       <p>
-        A landing oldal nem használ követőszkripteket, analitikát, külső betűkészleteket vagy
-        marketing cookie-kat. A bemutatók a böngésződben futnak; nincs fiók vagy regisztráció.
+        A weboldal nem használ követőszkripteket, analitikát, külső betűkészleteket vagy marketing
+        cookie-kat. A bemutatók a böngésződben futnak; nincs fiók vagy regisztráció.
       </p>
       <p>
         A weboldal a saját kiszolgálójáról tölti be a képeket és a kiadási jegyzéket. Nyilvános
@@ -620,7 +621,7 @@
         >
           ×
         </button>
-        <span class="eyebrow">TRACER / DOKUMENTÁCIÓ</span>
+        <span class="eyebrow">Tracer / Dokumentáció</span>
         <h2 id="document-dialog-title">Dokumentum</h2>
       </div>
       <p class="document-loading" id="document-loading" role="status" hidden>
@@ -631,7 +632,7 @@
           A dokumentum most nem tölthető be. Próbáld újra később, vagy nyisd meg a weboldalt a helyi
           kiszolgálón keresztül.
         </p>
-        <button class="button button-secondary document-retry" id="document-retry" type="button">
+        <button class="button button-light document-retry" id="document-retry" type="button">
           Újrapróbálás
         </button>
       </div>
